@@ -4,9 +4,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-import Container from "@/components/container";
-import Sidebar from "@/components/sidebar";
-import { ModalProvider } from "@/providers/modal-provider";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader"
 

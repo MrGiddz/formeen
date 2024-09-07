@@ -24,9 +24,9 @@ const ShareLink = ({ shareUrl }: { shareUrl: string }) => {
     <ActionTooltip label={!isCopied ? "Copy" : "Copied"} side="right">
       <div className="relative my-4 flex gap-2 items-center w-full h-9 pb-4">
         <Input className="w-full" readOnly value={shareLink} />
-        <ShowPopover open={isCopied} text="Copied to your clipboard">
+        <ShowPopover open={isCopied}>
           <Button
-            className=" absolute h-full right-0"
+            className="absolute h-full right-0"
             onClick={() => {
               navigator.clipboard.writeText(shareLink);
               setIsCopied(true);

@@ -52,8 +52,8 @@ const SignInForm = () => {
   });
 
   const submit = (values: LoginType) => {
-    setError("")
-    setSuccess("")
+    setError("");
+    setSuccess("");
     startTransition(() => {
       signInUser(values, callbackUrl)
         .then((data) => {
@@ -157,7 +157,7 @@ const SignInForm = () => {
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="data-[state=checked]:bg-gray-500 border-gray-500 dark:data-[state=checked]:bg-white dark:border-white"
+                            className="data-[state=checked]: bg-gray-500 border-gray-500 dark:data-[state=checked]:bg-white dark:border-white"
                           />
                         </FormControl>
                         <FormLabel
@@ -192,7 +192,7 @@ const SignInForm = () => {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <Button
-            className="w-full bg-gray-500 dark:bg-white dark:hover:bg-slate-200  hover:bg-primary/70 hover:text-primary-foreground"
+            className="w-full  bg-gray-500 dark:bg-white dark:hover:bg-slate-200  hover:bg-primary/70 hover:text-primary-foreground"
             size="lg"
             type="submit"
             disabled={isPending}

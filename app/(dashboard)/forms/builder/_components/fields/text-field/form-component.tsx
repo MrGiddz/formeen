@@ -11,7 +11,7 @@ function FormComponent({
   elementInstance,
   submitValue,
   isInvalid,
-  defaultValue
+  defaultValue,
 }: {
   elementInstance: FormElementInstance;
   submitValue?: SubmitFunctionType;
@@ -23,13 +23,12 @@ function FormComponent({
   const [error, setError] = useState(false);
   const { label, placeHolder, helperText, required } = element.extraAttributes;
 
-  console.log({defaultValue})
   useEffect(() => {
     setError(isInvalid === true);
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-foreground/10 p-4 rounded-md">
+    <div className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded-md">
       <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
@@ -37,7 +36,7 @@ function FormComponent({
       <Input
         placeholder={placeHolder}
         className={cn(
-          "ring-foreground border-foreground/40 placeholder:text-foreground/80",
+          "ring-foreground dark:text-white border-foreground/40 placeholder:text-foreground/80",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
         onChange={(e) => setValue(e.target.value)}
@@ -45,7 +44,6 @@ function FormComponent({
           if (!submitValue) return;
           submitValue(element.id, e.target.value);
           const valid = TextFieldFormElement.validate(element, e.target.value);
-          console.log({validate: TextFieldFormElement.validate(element, e.target.value)})
           setError(!valid);
           if (!valid) return;
           submitValue(element.id, e.target.value);

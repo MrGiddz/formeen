@@ -11,7 +11,6 @@ function SpacerFieldFormComponent({
 }) {
   const element = elementInstance as SpacerFieldExtraAttributesProps;
   const { height } = element.extraAttributes;
-  console.log({spacerFieldHeight: height});
   return <div style={{ height, width: "100%" }}></div>;
 }
 

@@ -8,17 +8,29 @@ import { SpacerFieldFormElement } from "./fields/spacer-field";
 import { NumberFieldFormElement } from "./fields/number-field";
 import { TextareaFieldFormElement } from "./fields/textarea-field";
 import { DateFieldFormElement } from "./fields/date-field";
+import { SelectFieldFormElement } from "./fields/select-field";
+import { CheckboxFieldFormElement } from "./fields/checkbox-field";
+import { LogoFieldFormElement } from "./fields/logo-field";
+import { PhoneFieldFormElement } from "./fields/phone-field";
+import { EmailFieldFormElement } from "./fields/email-field";
+import { RadioFieldFormElement } from "./fields/radio-field";
 
 export type ElementTypes =
+  | "LogoField"
   | "TextField"
   | "TitleField"
+  | "RadioField"
   | "SubtitleField"
   | "ParagraphField"
   | "SeparatorField"
   | "SpacerField"
   | "NumberField"
+  | "PhoneField"
+  | "EmailField"
   | "TextareaField"
-  | "DateField";
+  | "DateField"
+  | "SelectField"
+  | "CheckboxField";
 
 export type SubmitFunctionType = (key: string, value: string) => void;
 
@@ -65,5 +77,11 @@ export const FormElements: FormElementType = {
   SpacerField: SpacerFieldFormElement,
   NumberField: NumberFieldFormElement,
   TextareaField: TextareaFieldFormElement,
-  DateField: DateFieldFormElement
+  DateField: DateFieldFormElement,
+  SelectField: SelectFieldFormElement,
+  CheckboxField: CheckboxFieldFormElement,
+  LogoField: LogoFieldFormElement,
+  PhoneField: PhoneFieldFormElement,
+  EmailField: EmailFieldFormElement,
+  RadioField: RadioFieldFormElement
 };

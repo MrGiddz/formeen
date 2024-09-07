@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FormElementInstance, SubmitFunctionType } from "../../form-elements";
-import { ExtraAttributesProps, TextFieldFormElement } from ".";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { ExtraAttributesProps, TextFieldFormElement } from "../text-field";
 
 type Props = {};
 
@@ -11,7 +12,7 @@ function FormComponent({
   elementInstance,
   submitValue,
   isInvalid,
-  defaultValue
+  defaultValue,
 }: {
   elementInstance: FormElementInstance;
   submitValue?: SubmitFunctionType;
@@ -23,13 +24,12 @@ function FormComponent({
   const [error, setError] = useState(false);
   const { label, placeHolder, helperText, required } = element.extraAttributes;
 
-  console.log({defaultValue})
   useEffect(() => {
     setError(isInvalid === true);
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-foreground/10 p-4 rounded-md">
+    <div className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded-md">
       <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
@@ -45,7 +45,9 @@ function FormComponent({
           if (!submitValue) return;
           submitValue(element.id, e.target.value);
           const valid = TextFieldFormElement.validate(element, e.target.value);
-          console.log({validate: TextFieldFormElement.validate(element, e.target.value)})
+          console.log({
+            validate: TextFieldFormElement.validate(element, e.target.value),
+          });
           setError(!valid);
           if (!valid) return;
           submitValue(element.id, e.target.value);

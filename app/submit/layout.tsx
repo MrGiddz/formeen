@@ -12,9 +12,9 @@ export default function Layout({ children }: Props) {
   return (
     <div className="flex flex-col h-full min-h-screen min-w-full bg-background max-h-screen">
       <nav className="flex justify-between items-center border-b border-border h-[60px] px-4 py-2">
-        <h1 className={cn("uppercase text-medium font-bold", assistant600)}>
+        {/* <h1 className={cn("uppercase text-medium font-bold", assistant600)}>
           RCCG Ceaseless Joy Parish, Makogi Magboro
-        </h1>
+        </h1> */}
         <div className="flex gap-4 items-center">
           <ModeToggle />
         </div>

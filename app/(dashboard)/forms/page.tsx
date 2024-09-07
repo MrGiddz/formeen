@@ -21,22 +21,22 @@ async function Forms({}: Props) {
   }
   const stats = await GetFormStats();
   return (
-    <div className="container pt-4">
+    <div className="container pt-2">
       <Suspense fallback={<StatCards loading={false} />}>
         <StatCardWrapper data={stats} loading={false}  />
       </Suspense>
 
-      <Separator className="my-6" />
+      <Separator className="my-4" />
 
-      <h2 className="text-4xl font-bold col-span-2">Your Forms</h2>
+      <h2 className="text-xl font-bold col-span-2">Your Forms</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-2">
         <CreateFormBtn />
         <Suspense fallback={[1,2,3,4].map(el => <FormCardSkeleton key={el} />)}>
           <FormCards />
         </Suspense>
       </div>
-      <Separator className="my-6" />
+      <Separator className="my-4" />
     </div>
   );
 }

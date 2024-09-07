@@ -95,7 +95,7 @@ function FormProperties({ elementInstance }: Props) {
           name="label"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Text</FormLabel>
+              <FormLabel>Label</FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -161,7 +161,6 @@ function FormProperties({ elementInstance }: Props) {
                 <Switch
                   checked={field.value}
                   onCheckedChange={(e) => {
-                    console.log(e);
                     form.setValue("required", e, {
                       shouldValidate: true,
                     });

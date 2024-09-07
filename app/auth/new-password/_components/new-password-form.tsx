@@ -79,7 +79,6 @@ const NewPasswordForm = () => {
                     showSteps={false}
                     password={form.getValues("password")}
                     validate={(error) => {
-                    
                       setPasswordError(error);
                     }}
                   />
@@ -90,7 +89,7 @@ const NewPasswordForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button
-            className="w-full bg-gray-500 hover:bg-primary/70 hover:text-primary-foreground"
+            className="w-full  bg-gray-500 hover:bg-primary/70 hover:text-primary-foreground"
             size="lg"
             type="submit"
             disabled={isPending || isPasswordError}

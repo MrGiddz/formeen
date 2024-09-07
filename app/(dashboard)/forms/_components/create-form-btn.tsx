@@ -14,7 +14,7 @@ const CreateFormBtn = () => {
       variant="ghost-outline"
     >
       <BsFileEarmarkPlus className="h-8 w-8 text-muted-foreground group-hover:text-primary" />
-      <p className="font-bold text-base text-muted-foreground group-hover:text-primary">
+      <p className="font-bold text-sm text-muted-foreground group-hover:text-primary">
         Create new form
       </p>
     </Button>

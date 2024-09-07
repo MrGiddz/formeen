@@ -50,18 +50,18 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           )}
         >
           {modalTitle && description && (
-            <DialogHeader className="pt-8 px-6">
-              <DialogTitle className="text-2xl text-foreground text-center">
+            <DialogHeader className="pt-8 px-4">
+              <DialogTitle className="text-lg text-foreground text-center">
                 {modalTitle}
               </DialogTitle>
-              <DialogDescription className="text-center leading-4 my-4 text-zinc-500">
+              <DialogDescription className="text-center text-sm leading-4 my-4 text-zinc-500">
                 {description}
               </DialogDescription>
             </DialogHeader>
           )}
           <div className="w-full h-full flex flex-col">{children}</div>
           {footer && (
-            <DialogFooter className=" bg-muted px-6 py-4">
+            <DialogFooter className="bg-muted px-6 py-4">
               {footer}
             </DialogFooter>
           )}

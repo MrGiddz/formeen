@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 type CreateFormModalType = z.infer<typeof CreateFormSchema>;
 
 const CreateFormModal = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { toast } = useToast();
   const { isOpen, onClose, type, data } = useModal();
 
@@ -51,9 +51,9 @@ const CreateFormModal = () => {
         title: "Form created!!!",
         description: "Form was successfully created",
       });
-      onClose()
-      console.log({formUrl})
-      router.push(`/forms/builder/${formUrl}`)
+      onClose();
+      console.log({ formUrl });
+      router.push(`/forms/builder/${formUrl}`);
     } catch (error) {
       toast({
         title: "Error",
@@ -68,7 +68,7 @@ const CreateFormModal = () => {
 
   return (
     <Modal
-    modalTitle="Create New Form"
+      modalTitle="Create New Form"
       description="Create a new form and start getting notifications instantly."
       onOpenChange={onClose}
       open={isModalOpen}
@@ -98,7 +98,7 @@ const CreateFormModal = () => {
     >
       <Form {...form}>
         <form className="space-y-2">
-          <div className="px-5 my-5">
+          <div className="px-4 my-3">
             <FormField
               control={control}
               name="name"
@@ -107,7 +107,10 @@ const CreateFormModal = () => {
                   <FormItem>
                     <FormLabel className="text-foreground">Name</FormLabel>
                     <FormControl>
-                      <Input className="text-foreground/70 placeholder:text-muted-foreground"  {...field} />
+                      <Input
+                        className="text-foreground/70 placeholder:text-muted-foreground"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -120,9 +123,15 @@ const CreateFormModal = () => {
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel className="text-foreground">Description</FormLabel>
+                    <FormLabel className="text-foreground">
+                      Description
+                    </FormLabel>
                     <FormControl>
-                      <Textarea className="text-foreground/70 placeholder:text-muted-foreground"  {...field} rows={5} />
+                      <Textarea
+                        className="text-foreground/70 placeholder:text-muted-foreground"
+                        {...field}
+                        rows={5}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

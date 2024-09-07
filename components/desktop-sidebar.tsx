@@ -25,7 +25,7 @@ const DesktopSidebar = (props: SidebarDesktopProps) => {
       )}
     >
       <div className="h-full flex flex-col px-2 py-4">
-        <h3 className="mx-3 text-lg font-semibold text-foreground">
+        <h3 className="mx-3 text-base font-semibold text-foreground">
           {APP_NAME}
         </h3>
         <div className="mt-8 flex flex-col h-full mb-8">

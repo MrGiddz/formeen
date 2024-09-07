@@ -2,13 +2,11 @@
 
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import DesktopSidebar from "./desktop-sidebar";
-import { Bell, FormInput, Home, Mail, MoreHorizontal } from "lucide-react";
+import { Bell, FormInput, Home, Mail } from "lucide-react";
 import { SidebarItems } from "@/types";
-import SidebarButton from "./sidebar-button";
-import { useMediaQuery } from "usehooks-ts";
 import MobileSidebar from "./mobile-sidebar";
 import DesktopSidebarSkeleton from "./sidebar-skeleton";
-("usehooks-ts");
+
 
 type Props = {};
 

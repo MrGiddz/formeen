@@ -9,9 +9,6 @@ type Props = {
 };
 
 function ErrorPage({ error }: Props) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
   return (
     <div className="flex flex-col gap-y-4 w-full h-full items-center justify-center">
       <h2 className=" text-destructive text-base">Something went wrong</h2>

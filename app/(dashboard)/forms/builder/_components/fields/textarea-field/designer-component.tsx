@@ -17,7 +17,7 @@ function DesignerComponent({
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
       </Label>
-      <Textarea readOnly disabled placeholder={placeHolder} className=" placeholder:text-foreground/50" />
+      <Textarea readOnly disabled placeholder={placeHolder} className="placeholder:text-foreground/50" />
       {helperText && (
         <p className="text-foreground text-[0.8rem]">{helperText}</p>
       )}

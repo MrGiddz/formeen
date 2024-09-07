@@ -11,7 +11,7 @@ function FormComponent({
   elementInstance,
   submitValue,
   isInvalid,
-  defaultValue
+  defaultValue,
 }: {
   elementInstance: FormElementInstance;
   submitValue?: SubmitFunctionType;
@@ -21,15 +21,15 @@ function FormComponent({
   const element = elementInstance as ExtraAttributesProps;
   const [value, setValue] = useState(defaultValue || "");
   const [error, setError] = useState(false);
-  const { label, placeHolder, helperText, required, min } = element.extraAttributes;
+  const { label, placeHolder, helperText, required, min } =
+    element.extraAttributes;
 
-  console.log({defaultValue})
   useEffect(() => {
     setError(isInvalid === true);
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-foreground/10 p-4 rounded-md">
+    <div className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded-md">
       <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
@@ -37,15 +37,17 @@ function FormComponent({
       <Input
         placeholder={placeHolder}
         className={cn(
-          "ring-foreground border-foreground/40 placeholder:text-foreground/80",
+          "ring-foreground text-foreground border-foreground/40 placeholder:text-foreground/80",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
         onChange={(e) => setValue(e.target.value)}
         onBlur={(e) => {
           if (!submitValue) return;
           submitValue(element.id, e.target.value);
-          const valid = NumberFieldFormElement.validate(element, e.target.value);
-          console.log({validate: NumberFieldFormElement.validate(element, e.target.value)})
+          const valid = NumberFieldFormElement.validate(
+            element,
+            e.target.value
+          );
           setError(!valid);
           if (!valid) return;
           submitValue(element.id, e.target.value);

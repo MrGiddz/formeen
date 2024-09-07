@@ -170,7 +170,7 @@ const SignUpForm = () => {
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        className="data-[state=checked]:bg-gray-500 border-gray-500 dark:data-[state=checked]:bg-white dark:border-white"
+                        className="data-[state=checked]: bg-gray-500 border-gray-500 dark:data-[state=checked]:bg-white dark:border-white"
                       />
                     </FormControl>
                     <FormLabel className="!m-0 cursor-pointer">
@@ -185,7 +185,7 @@ const SignUpForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button
-            className="w-full bg-gray-500 dark:bg-white hover:bg-primary/70 hover:text-primary-foreground"
+            className="w-full  bg-gray-500 dark:bg-white hover:bg-primary/70 hover:text-primary-foreground"
             size="lg"
             type="submit"
             disabled={isPending}

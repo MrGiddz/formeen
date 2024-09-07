@@ -39,7 +39,6 @@ export const TextFieldFormElement: FormElement = {
       console.log(currentValue, currentValue.length > 0)
       return currentValue.length > 0
     }
-    console.log(`required:`, element.extraAttributes, "currentValue: ", currentValue.length > 0)
     return true
   }
 };

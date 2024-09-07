@@ -30,16 +30,13 @@ const FormSubmit = ({ formUrl, content }: FormSubmitProps) => {
     for (const field of content) {
       const actualValue = formValues.current[field.id] || "";
       const valid = FormElements[field.type].validate(field, actualValue);
-
       if (!valid) {
         formErrors.current[field.id] = true;
       }
     }
-
     if (Object.keys(formErrors.current).length > 0) {
       return false;
     }
-
     return true;
   }, [content]);
 

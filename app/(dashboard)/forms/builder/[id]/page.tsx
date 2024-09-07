@@ -10,9 +10,6 @@ async function Builder({ params }: { params: { id: string } }) {
   if (!form) {
     throw new Error("Form not found");
   }
-
-
-
   return <FormBuilder form={form} />;
 }
 

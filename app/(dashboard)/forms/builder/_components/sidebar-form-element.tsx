@@ -16,6 +16,7 @@ function SidebarFormElement({}: Props) {
         Layout Elements
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 place-items-center">
+        <SidebarBtnElement formElement={FormElements.LogoField} />
         <SidebarBtnElement formElement={FormElements.TitleField} />
         <SidebarBtnElement formElement={FormElements.SubtitleField} />
         <SidebarBtnElement formElement={FormElements.SeparatorField} />
@@ -28,9 +29,14 @@ function SidebarFormElement({}: Props) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 place-items-center">
         <SidebarBtnElement formElement={FormElements.TextField} />
         <SidebarBtnElement formElement={FormElements.ParagraphField} />
+        <SidebarBtnElement formElement={FormElements.PhoneField} />
+        <SidebarBtnElement formElement={FormElements.EmailField} />
         <SidebarBtnElement formElement={FormElements.NumberField} />
         <SidebarBtnElement formElement={FormElements.TextareaField} />
         <SidebarBtnElement formElement={FormElements.DateField} />
+        <SidebarBtnElement formElement={FormElements.SelectField} />
+        <SidebarBtnElement formElement={FormElements.RadioField} />
+        <SidebarBtnElement formElement={FormElements.CheckboxField} />
       </div>
     </div>
   );

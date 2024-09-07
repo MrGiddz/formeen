@@ -104,7 +104,6 @@ function FormProperties({ elementInstance }: Props) {
   const { updateElement } = useDesigner();
   
   const element = elementInstance as ExtraAttributesProps;
-  console.log({ FormPropertiesSchema });
   const form = useForm<PropertiesSchemaType>({
     resolver: zodResolver(FormPropertiesSchema),
     defaultValues: {
@@ -118,7 +117,6 @@ function FormProperties({ elementInstance }: Props) {
 
   const jsonRepresentation = schemaToJson(FormPropertiesSchema);
 
-  console.log({ jsonRepresentation });
 
   const {
     handleSubmit,
@@ -131,9 +129,7 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    console.log({ values });
     const { label, helperText, required, placeHolder } = values;
-    console.log({ label, helperText, required, placeHolder });
     updateElement(element.id, {
       ...element,
       extraAttributes: { label, helperText, required, placeHolder },

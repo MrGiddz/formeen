@@ -44,6 +44,14 @@ const SubmissionsTable = async ({ id }: { id: string }) => {
   for (const element of formElements) {
     switch (element.type) {
       case "TextField":
+        case "EmailField":
+          case "PhoneField":
+        case "DateField":
+          case "NumberField":
+      case "CheckboxField":
+      case "RadioField":
+      case "SelectField":
+      case "TextareaField":
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
@@ -94,11 +102,9 @@ const SubmissionsTable = async ({ id }: { id: string }) => {
                   />
                 ))}
                 <TableCell className="text-muted-foreground text-right">
-                  {
-                    formatDistance(row.submittedAt, new Date(), {
-                      addSuffix: true
-                    })
-                  }
+                  {formatDistance(row.submittedAt, new Date(), {
+                    addSuffix: true,
+                  })}
                 </TableCell>
               </TableRow>
             ))}

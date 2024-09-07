@@ -52,7 +52,7 @@ const PreviewFormModal = () => {
       onOpenChange={onClose}
       open={isModalOpen}
       variant="large"
-      className="gap-0 max-h-screen h-full max-w-screen-2xl flex-col flex-grow p-0"
+      className="gap-0 h-full max-w-screen-2xl flex-col flex-grow p-0"
     >
       <div className="px-4 py-2 border-b">
         <p className="text-lg font-bold text-muted-foreground">Form Preview</p>

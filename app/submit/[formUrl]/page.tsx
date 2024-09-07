@@ -6,15 +6,11 @@ import React from "react";
 async function SubmitPage({ params }: { params: { formUrl: string } }) {
   const { formUrl } = params;
   const form = await GetFormByFormUrl(formUrl);
-
   if (!form) {
     throw new Error("Form not found");
   }
-
   const formContent = JSON.parse(form.content) as FormElementInstance[];
-
-  console.log({formContent})
-  return <FormSubmit formUrl={params.formUrl} content={formContent} />;
+  return <FormSubmit formUrl={formUrl} content={formContent} />;
 }
 
 export default SubmitPage;

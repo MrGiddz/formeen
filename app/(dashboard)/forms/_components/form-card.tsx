@@ -21,12 +21,16 @@ const FormCard = async ({ form }: { form: Form }) => {
     <Card>
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
-          <span className="">{form.name}</span>
-          {form.published && <Badge>Published</Badge>}
-          {!form.published && <Badge variant="destructive">Draft</Badge>}
+          <span className="text-sm">{form.name}</span>
+          {form.published && <Badge className="text-xs">Published</Badge>}
+          {!form.published && (
+            <Badge className="text-sm" variant="destructive">
+              Draft
+            </Badge>
+          )}
         </CardTitle>
-        <CardDescription className="flex items-center justify-between text-muted-foreground text-sm">
-          <div>
+        <div className="flex items-center justify-between text-muted-foreground text-sm">
+          <div className="text-sm">
             {formatDistance(form.createdAt, new Date(), {
               addSuffix: true,
             })}
@@ -36,33 +40,37 @@ const FormCard = async ({ form }: { form: Form }) => {
               <ActionTooltip label="Visits" side="bottom">
                 <div className="flex items-center justify-center gap-2">
                   <LuView className="text-muted-foreground" />
-                  <span>{form.visits.toLocaleString()}</span>
+                  <span className="text-sm">
+                    {form.visits.toLocaleString()}
+                  </span>
                 </div>
               </ActionTooltip>
               <ActionTooltip label="Submissions" side="bottom">
                 <div className="flex items-center justify-center gap-2">
                   <FaWpforms className="text-muted-foreground" />
-                  <span>{form.submissions.toLocaleString()}</span>
+                  <span className="text-sm">
+                    {form.submissions.toLocaleString()}
+                  </span>
                 </div>
               </ActionTooltip>
             </div>
           )}
-        </CardDescription>
+        </div>
       </CardHeader>
-      <CardContent className="n-[20px] truncate text-sm text-muted-foreground">
+      <CardContent className="truncate text-sm text-muted-foreground">
         {form.description || "No Description"}
       </CardContent>
       <CardFooter>
         {form.published && (
           <Button className="w-full mt-2 text-md gap-4" asChild>
-            <Link href={`/forms/details/${form.id}`}>
+            <Link href={`/forms/details/${form.id}`} className="text-xs p-2">
               View Submissions <BiRightArrowAlt />
             </Link>
           </Button>
         )}
         {!form.published && (
-          <Button className="w-full mt-2 text-md gap-4" asChild>
-            <Link href={`/forms/builder/${form.id}`}>
+          <Button className="w-full text-sm gap-4" asChild>
+            <Link href={`/forms/builder/${form.id}`} className="text-xs">
               Edit Form <FaEdit />
             </Link>
           </Button>

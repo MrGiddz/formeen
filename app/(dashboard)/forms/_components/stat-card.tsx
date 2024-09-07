@@ -20,16 +20,16 @@ const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
           </CardTitle>
           {icon}
         </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
+        <CardContent className="p-4 pt-0">
+          <div className="text-base font-bold">
             {loading && (
               <Skeleton>
                 <span className="opacity-0">0</span>
               </Skeleton>
             )}
             {!loading && value}
+            <p className="text-xs text-muted-foreground-pt-1">{helperText}</p>
           </div>
-          <p className="text-xs text-muted-foreground-pt-1">{helperText}</p>
         </CardContent>
       </Card>
     );

@@ -7,20 +7,30 @@ interface SidebarButtonProps extends ButtonProps {
   icon?: LucideIcon;
 }
 
-const SidebarButton = ({ icon: Icon, className, children, ...props }: SidebarButtonProps) => {
+const SidebarButton = ({
+  icon: Icon,
+  className,
+  children,
+  ...props
+}: SidebarButtonProps) => {
   return (
-    <Button variant="ghost" className={cn("gap-2 h-10 justify-start", className)} {...props}>
+    <Button
+      variant="ghost"
+      className={cn("gap-2 h-8 justify-start text-xs", className)}
+      {...props}
+    >
       {Icon && <Icon size={20} />}
-      <span >{children}</span>
+      <span>{children}</span>
     </Button>
   );
 };
 
 export default SidebarButton;
 
-
 export function SidebarButtonSheetClose(props: SidebarButtonProps) {
-    return <SheetClose asChild>
-        <SidebarButton {...props} />
+  return (
+    <SheetClose asChild>
+      <SidebarButton {...props} />
     </SheetClose>
+  );
 }

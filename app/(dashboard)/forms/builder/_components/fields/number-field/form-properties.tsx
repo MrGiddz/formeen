@@ -49,7 +49,6 @@ function FormProperties({ elementInstance }: Props) {
   const { updateElement } = useDesigner();
 
   const element = elementInstance as ExtraAttributesProps;
-  console.log({ FormPropertiesSchema });
   const form = useForm<PropertiesSchemaType>({
     resolver: zodResolver(FormPropertiesSchema),
     defaultValues: {
@@ -188,7 +187,6 @@ function FormProperties({ elementInstance }: Props) {
                 <Switch
                   checked={field.value}
                   onCheckedChange={(e) => {
-                    console.log(e);
                     form.setValue("required", e, {
                       shouldValidate: true,
                     });

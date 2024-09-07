@@ -28,7 +28,7 @@ type Props = {
 };
 
 function FormBuilder({ form }: Props) {
-  const { elements, setElements, setFormId } = useDesigner();
+  const { elements, setElements, setSelectedElement, setFormId } = useDesigner();
   const [isReady, setIsReady] = useState<boolean>(false);
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -48,6 +48,7 @@ function FormBuilder({ form }: Props) {
     try {
       const elements = JSON.parse(form.content);
       setElements(elements);
+      setSelectedElement(null)
       setFormId(form.id)
     } catch (error) {
       console.log({error})
@@ -55,7 +56,7 @@ function FormBuilder({ form }: Props) {
 
     const readyTimeout = setTimeout(() => setIsReady(true), 500);
     return () => clearTimeout(readyTimeout);
-  }, [form, isReady, setElements]);
+  }, [form, isReady, setElements, setSelectedElement]);
 
   if (!isReady) {
     return (
@@ -65,9 +66,8 @@ function FormBuilder({ form }: Props) {
     );
   }
 
-  const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
+  const shareUrl = `${form.shareURL}`;
 
-  console.log({form})
 
   if (form.published) {
     return (
@@ -121,7 +121,7 @@ function FormBuilder({ form }: Props) {
               )}
             </div>
           </nav>
-          <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+          <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
             <Designer />
           </div>
         </main>

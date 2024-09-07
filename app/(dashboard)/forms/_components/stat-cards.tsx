@@ -9,7 +9,7 @@ import { StatCardsProps } from "./stat-card-wrapper";
 
 const StatCards = async ({ data, loading }: StatCardsProps) => {
   return (
-    <div className="w-full pt-8 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <div className="w-full pt-2 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
       <StatCard
         loading={loading}
         title="Total Visits"

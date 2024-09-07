@@ -22,25 +22,25 @@ async function FormDetails({ params }: { params: { id: string } }) {
 
   return (
     <div className="py-10 border-b border-muted">
-      <div className="container my-5 mb-6">
+      <div className="my-5 mb-6">
         <NavHistory currentPage={{ name: form.name }} />
       </div>
-      <div className="flex justify-between container">
+      <div className="flex justify-between">
         <h1 className="text-2xl font-bold truncate">{form.name}</h1>
         <VisitButton shareUrl={form.shareURL} />
       </div>
       <div className="py-4 border-b border-muted">
-        <div className="container flex gap-2 items-center justify-between">
+        <div className="flex gap-2 items-center justify-between">
           <ShareLink shareUrl={form.shareURL} />
         </div>
       </div>
-      <div className="w-full pt-8 gap-4 container">
+      <div className="w-full pt-8 gap-4">
         <Suspense fallback={<StatCards loading={false} />}>
           <StatCardWrapper data={formStat} loading={false} />
         </Suspense>
       </div>
 
-      <div className="container pt-10">
+      <div className="pt-10">
         <SubmissionsTable id={id} />
       </div>
     </div>

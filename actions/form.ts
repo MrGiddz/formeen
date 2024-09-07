@@ -244,6 +244,9 @@ export async function SubmitForm(
   formUrl: string,
   jsonContent: string
 ): Promise<Form | null> {
+
+  console.log({jsonContent})
+
   const form = await db.form.update({
     where: {
       shareURL: formUrl,
