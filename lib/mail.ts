@@ -52,7 +52,7 @@ export const sendPasswordResetEmail = async (
   to: string,
   token: string
 ): Promise<MailResponse> => {
-  const resetLink = `http://localhost:3000/auth/new-password?token=${token}`;
+  const resetLink = `${process.env.NEXT_PUBLIC_DOMAINNAME}/auth/new-password?token=${token}`;
   return await transport
     .sendMail({
       from: SMTP_EMAIL,
@@ -72,7 +72,7 @@ export const sendPasswordResetEmail = async (
 };
 
 export const sendVerficationEmail = async (to: string, token: string) => {
-  const confirmLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmLink = `${process.env.NEXT_PUBLIC_DOMAINNAME}/auth/new-verification?token=${token}`;
   console.log("sending mail to: ", to);
   return await transport
     .sendMail({

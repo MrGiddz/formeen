@@ -60,13 +60,16 @@ export async function sendmail({
   text: string;
 }) {
   try {
-    const { data } = await axios.post("/api/mail", {
-      to,
-      subject,
-      text,
-      html,
-      fromName,
-    });
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_DOMAINNAME}/api/mail`,
+      {
+        to,
+        subject,
+        text,
+        html,
+        fromName,
+      }
+    );
 
     console.log("Email sent successfully", data);
 
