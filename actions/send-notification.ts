@@ -1,7 +1,6 @@
 import axios from "axios";
 
-import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+const baseURL = process.env.NEXT_PUBLIC_DOMAINNAME || 'http://localhost:3001';
 
 class SendingError extends Error {
   constructor() {
@@ -60,19 +59,13 @@ export async function sendmail({
   text: string;
 }) {
   try {
-    console.log("sending mail");
-    const { data } = await axios.post(
-      process.env.NODE_ENV === "test"
-        ? `/api/mail`
-        : `${process.env.NEXT_PUBLIC_DOMAINNAME}/api/mail`,
-      {
-        to,
-        subject,
-        text,
-        html,
-        fromName,
-      }
-    );
+    const { data } = await axios.post(`${baseURL}/api/mail`, {
+      to,
+      subject,
+      text,
+      html,
+      fromName,
+    });
 
     console.log("Email sent successfully", data);
 
