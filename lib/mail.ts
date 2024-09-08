@@ -1,7 +1,7 @@
 import Handlebars from "handlebars";
 import nodemailer from "nodemailer";
 
-const { SMTP_HOST, SMTP_GMAIL_PASS, SMTP_EMAIL, NODE_ENV } = process.env;
+const { SMTP_HOST, SMTP_GMAIL_PASS, SMTP_USER, SMTP_PASS, SMTP_EMAIL, NODE_ENV } = process.env;
 
 const transport =
   NODE_ENV !== "test"
@@ -19,8 +19,8 @@ const transport =
         port: 465,
         secure: true,
         auth: {
-          user: SMTP_EMAIL,
-          pass: SMTP_GMAIL_PASS,
+          user: SMTP_USER,
+          pass: SMTP_PASS,
         },
       });
 

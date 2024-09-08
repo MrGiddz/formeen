@@ -36,8 +36,10 @@ const FormPropertiesSchema = z.object({
   helperText: z.string().max(200, {
     message: "Length cannot exceed 200 characters",
   }),
+  name: z.string().min(2, {
+    message: "Element name is required",
+  }),
   required: z.boolean().default(false),
-
 });
 
 type PropertiesSchemaType = z.infer<typeof FormPropertiesSchema>;
@@ -53,7 +55,7 @@ function FormProperties({ elementInstance }: Props) {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
-
+      name: element.extraAttributes.name,
     },
     mode: "all",
   });
@@ -69,11 +71,11 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { label, helperText, required, } = values;
+    const { label, helperText, required, name } = values;
 
     updateElement(element.id, {
       ...element,
-      extraAttributes: { label, helperText, required },
+      extraAttributes: { label, helperText, required, name },
     });
   };
 
@@ -117,7 +119,39 @@ function FormProperties({ elementInstance }: Props) {
             </FormItem>
           )}
         />
- 
+        <FormField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const formattedValue = e.target.value
+                      .replace(/\s+/g, "")
+                      .toLowerCase(); // Remove spaces and convert to lowercase
+                    form.setValue("name", formattedValue, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.currentTarget.blur();
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                Name of the element. This will be used to make reference to the
+                element.
+                <br />
+                <strong>Do not add spaces in between</strong>
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={control}
           name="helperText"
@@ -172,7 +206,6 @@ function FormProperties({ elementInstance }: Props) {
             </FormItem>
           )}
         />
-
       </form>
     </Form>
   );

@@ -10,7 +10,7 @@ async function SubmitPage({ params }: { params: { formUrl: string } }) {
     throw new Error("Form not found");
   }
   const formContent = JSON.parse(form.content) as FormElementInstance[];
-  return <FormSubmit formUrl={formUrl} content={formContent} />;
+  return <FormSubmit formUrl={formUrl} content={formContent} formName={form.name} />;
 }
 
 export default SubmitPage;

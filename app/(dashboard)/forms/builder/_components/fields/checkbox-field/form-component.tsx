@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FormElementInstance, SubmitFunctionType } from "../../form-elements";
 import { CheckboxFieldFormElement, ExtraAttributesProps } from ".";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-
-type Props = {};
 
 function FormComponent({
   elementInstance,
@@ -30,8 +27,9 @@ function FormComponent({
   useEffect(() => {
     setError(isInvalid === true);
   }, [isInvalid]);
+
   return (
-    <div className="flex items-top space-x-2">
+    <div className="flex items-top space-x-2 pb-1">
       <Checkbox
         id={id}
         checked={value}
@@ -39,11 +37,9 @@ function FormComponent({
         onCheckedChange={(checked) => {
           let value = false;
           if (checked) value = true;
-
           setValue(value);
           if (!submitValue) return;
           const valueString = value ? "true" : "false";
-
           const valid = CheckboxFieldFormElement.validate(
             element,
             value ? "true" : "false"
@@ -53,7 +49,10 @@ function FormComponent({
         }}
       />
       <div className="grid gap-1.5 leading-none">
-        <Label htmlFor={id} className={cn("dark:text-white", error && "text-red-500")}>
+        <Label
+          htmlFor={id}
+          className={cn("dark:text-white", error && "text-red-500")}
+        >
           {label}
           {required && <span className="text-destructive ml-2">*</span>}
         </Label>

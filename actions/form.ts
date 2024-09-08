@@ -175,14 +175,14 @@ export async function GetFormById(id: string): Promise<Form | null> {
   return form;
 }
 
-export async function GetFormByFormUrl(formUrl: string) {
+export async function GetFormByFormUrl(formUrl: string): Promise<Form | null> {
   const form = await db.form.update({
     where: {
       shareURL: formUrl,
     },
-    select: {
-      content: true,
-    },
+    // select: {
+    //   content: true,
+    // },
     data: {
       visits: {
         increment: 1,

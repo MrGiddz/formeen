@@ -14,7 +14,8 @@ const extraAttributes = {
   helperText: "Helper Text",
   required: false,
   placeHolder: "123...",
-  min: 0
+  min: 0,
+  name: "number"
 };
 
 export type ExtraAttributesProps = FormElementInstance & {

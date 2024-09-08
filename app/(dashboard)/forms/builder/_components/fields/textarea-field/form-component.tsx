@@ -31,21 +31,21 @@ function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded-md">
+    <div className="flex flex-col gap-4 w-full px-4 pb-1 rounded-md">
       <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
       </Label>
+
       <Textarea
         placeholder={placeHolder}
         className={cn(
           "ring-foreground text-foreground border-foreground/40 placeholder:text-foreground/80",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={(e) => {
+        onChange={(e) => {
+          setValue(e.target.value);
           if (!submitValue) return;
-          submitValue(element.id, e.target.value);
           const valid = TextareaFieldFormElement.validate(
             element,
             e.target.value
@@ -54,9 +54,22 @@ function FormComponent({
           if (!valid) return;
           submitValue(element.id, e.target.value);
         }}
+        onBlur={(e) => {
+          if (!submitValue) return;
+          const valid = TextareaFieldFormElement.validate(
+            element,
+            e.target.value
+          );
+          setError(!valid);
+          if (!valid) return;
+          console.log(e.target.value);
+          console.log("saved TextareaFieldFormElement");
+          submitValue(element.id, e.target.value);
+        }}
         value={value}
         rows={rows}
       />
+
       {helperText && (
         <p
           className={cn(

@@ -39,10 +39,13 @@ const FormPropertiesSchema = z.object({
   placeHolder: z.string().max(50, {
     message: "Length cannot exceed 50 characters",
   }),
+  name: z.string().min(2, {
+    message: "Element name is required",
+  }),
 });
 
 interface FormPropertyConstraint {
-  kind: 'min' | 'max';
+  kind: "min" | "max";
   value: number;
   message: string;
 }
@@ -71,26 +74,37 @@ interface ZodSchemaEntry {
   };
 }
 
-function schemaToJson(schema: z.ZodObject<any>): FormPropertiesSchema { // Update input type
+function schemaToJson(schema: z.ZodObject<any>): FormPropertiesSchema {
+  // Update input type
   const jsonSchema: FormPropertiesSchema = {};
 
-  for (const [key, entry] of Object.entries(schema.shape)) { // Access .shape directly
+  for (const [key, entry] of Object.entries(schema.shape)) {
+    // Access .shape directly
     const zodType = entry as z.ZodTypeAny; // Type assertion for safety
     const value = zodType._def;
 
-    const filteredConstraints = value.checks 
-    ? value.checks
-        .filter((check: FormPropertyConstraint) => check.kind === 'min' || check.kind === 'max')
-        .map((check: FormPropertyConstraint): FormPropertyConstraint => ({
-          kind: check.kind as 'min' | 'max',
-          value: check.value as number,
-          message: check.message,
-        }))
-    : []; 
+    const filteredConstraints = value.checks
+      ? value.checks
+          .filter(
+            (check: FormPropertyConstraint) =>
+              check.kind === "min" || check.kind === "max"
+          )
+          .map(
+            (check: FormPropertyConstraint): FormPropertyConstraint => ({
+              kind: check.kind as "min" | "max",
+              value: check.value as number,
+              message: check.message,
+            })
+          )
+      : [];
 
     jsonSchema[key] = {
-      type: value.typeName.replace('Zod', '').toLowerCase() as 'string' | 'boolean',
-      ...(filteredConstraints.length > 0 && { constraints: filteredConstraints }),
+      type: value.typeName.replace("Zod", "").toLowerCase() as
+        | "string"
+        | "boolean",
+      ...(filteredConstraints.length > 0 && {
+        constraints: filteredConstraints,
+      }),
       ...(value.defaultValue !== undefined && { default: value.defaultValue }),
     };
   }
@@ -102,7 +116,7 @@ type PropertiesSchemaType = z.infer<typeof FormPropertiesSchema>;
 
 function FormProperties({ elementInstance }: Props) {
   const { updateElement } = useDesigner();
-  
+
   const element = elementInstance as ExtraAttributesProps;
   console.log({ FormPropertiesSchema });
   const form = useForm<PropertiesSchemaType>({
@@ -112,6 +126,7 @@ function FormProperties({ elementInstance }: Props) {
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
       placeHolder: element.extraAttributes.placeHolder,
+      name: element.extraAttributes.name,
     },
     mode: "all",
   });
@@ -129,10 +144,10 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { label, helperText, required, placeHolder } = values;
+    const { label, helperText, required, placeHolder, name } = values;
     updateElement(element.id, {
       ...element,
-      extraAttributes: { label, helperText, required, placeHolder },
+      extraAttributes: { label, helperText, required, placeHolder, name },
     });
   };
 
@@ -196,6 +211,38 @@ function FormProperties({ elementInstance }: Props) {
                 />
               </FormControl>
               <FormDescription>Place holder of the field</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const formattedValue = e.target.value
+                      .replace(/\s+/g, "")
+                      .toLowerCase(); // Remove spaces and convert to lowercase
+                    form.setValue("name", formattedValue, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.currentTarget.blur();
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                Name of the element. This will be used to make reference to the
+                element.
+                <br />
+                <strong>Do not add spaces in between</strong>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

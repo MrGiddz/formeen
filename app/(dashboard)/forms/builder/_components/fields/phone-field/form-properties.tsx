@@ -19,6 +19,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import { Select } from "@radix-ui/react-select";
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
   elementInstance: FormElementInstance;
@@ -41,13 +50,19 @@ const FormPropertiesSchema = z.object({
   placeHolder: z.string().max(50, {
     message: "Length cannot exceed 50 characters",
   }),
+  message: z.optional(z.string()),
   min: z.number().default(0).optional(),
+  name: z.string().min(2, {
+    message: "Element name is required",
+  }),
+  pointerVariable: z.optional(z.string()),
+  includeElementName: z.boolean().default(false),
 });
 
 type PropertiesSchemaType = z.infer<typeof FormPropertiesSchema>;
 
 function FormProperties({ elementInstance }: Props) {
-  const { updateElement } = useDesigner();
+  const { updateElement, elements } = useDesigner();
 
   const element = elementInstance as ExtraAttributesProps;
   const form = useForm<PropertiesSchemaType>({
@@ -59,6 +74,9 @@ function FormProperties({ elementInstance }: Props) {
       placeHolder: element.extraAttributes.placeHolder,
       min: element.extraAttributes.min,
       sendNotification: element.extraAttributes.sendNotification,
+      message: element.extraAttributes.message,
+      name: element.extraAttributes.name,
+      pointerVariable: element.extraAttributes.pointerVariable,
     },
     mode: "all",
   });
@@ -66,18 +84,45 @@ function FormProperties({ elementInstance }: Props) {
   const {
     handleSubmit,
     control,
+    watch,
     formState: { isLoading, isSubmitted, isValid, isSubmitting },
   } = form;
+  const isWatchingNotification = watch("sendNotification");
+  const isWatchingName = watch("name");
+
+  const formElementNames = elements.map((element) => ({
+    name: element.extraAttributes.name,
+  })).filter(elem => elem.name !== isWatchingName);
 
   useEffect(() => {
     form.reset(element.extraAttributes);
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { label, helperText, required, placeHolder, min, sendNotification } = values;
+    const {
+      label,
+      helperText,
+      required,
+      placeHolder,
+      min,
+      sendNotification,
+      message,
+      name,
+      pointerVariable,
+    } = values;
     updateElement(element.id, {
       ...element,
-      extraAttributes: { label, helperText, required, placeHolder, min, sendNotification },
+      extraAttributes: {
+        label,
+        helperText,
+        required,
+        placeHolder,
+        min,
+        sendNotification,
+        message,
+        name,
+        pointerVariable,
+      },
     });
   };
 
@@ -141,6 +186,38 @@ function FormProperties({ elementInstance }: Props) {
                 />
               </FormControl>
               <FormDescription>Place holder of the field</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const formattedValue = e.target.value
+                      .replace(/\s+/g, "")
+                      .toLowerCase(); // Remove spaces and convert to lowercase
+                    form.setValue("name", formattedValue, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.currentTarget.blur();
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                Name of the element. This will be used to make reference to the
+                element.
+                <br />
+                <strong>Do not add spaces in between</strong>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -225,6 +302,87 @@ function FormProperties({ elementInstance }: Props) {
             </FormItem>
           )}
         />
+
+        {isWatchingNotification && (
+          <>
+            <FormField
+              control={control}
+              name="message"
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-start justify-between rounded-lg border p-3 shadow-sm">
+                  <div className="space-y-0 5">
+                    <FormLabel className="text-left">Message</FormLabel>
+                  </div>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Your message"
+                      className={cn(
+                        "ring-foreground text-foreground border-foreground/40 placeholder:text-foreground/80"
+                      )}
+                      onChange={(e) => {
+                        form.setValue("message", e.target.value, {
+                          shouldValidate: false,
+                        });
+                      }}
+                      onBlur={(e) => {
+                        form.setValue("message", e.target.value, {
+                          shouldValidate: false,
+                        });
+                      }}
+                      value={field.value}
+                      rows={10}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Meaasge you want to deliver to the phone number.
+                    <p className="text-xs mt-2 text-green-700">To insert data from one of the form elements, select the name from pointer below and wrap the element name in an hashtag. e.g "Hello #fullname#" </p>
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="pointerVariable"
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-start justify-between rounded-lg border p-3 shadow-sm">
+                  <div className="space-y-0 5">
+                    <FormLabel className="text-left">Pointer</FormLabel>
+                  </div>
+                  <FormControl>
+                    <Select
+                      onValueChange={(value) => {
+                        form.setValue("pointerVariable", value, {
+                          shouldValidate: false,
+                        });
+                      }}
+                    >
+                      <SelectTrigger
+                        className={cn(
+                          "w-full items-start text-left text-foreground text-sm"
+                        )}
+                      >
+                        <SelectValue placeholder="Select One" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {formElementNames.map((option) => (
+                          <SelectItem key={option.name} value={option.name}>
+                            {option.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormDescription>
+                    Meaasge you want to deliver to the phone number.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
+
         <FormField
           control={control}
           name="min"

@@ -41,6 +41,9 @@ const FormPropertiesSchema = z.object({
   }),
   required: z.boolean().default(false),
   options: z.array(z.string()).default([]),
+  name: z.string().min(2, {
+    message: "Element name is required",
+  }),
 });
 
 interface FormPropertyConstraint {
@@ -124,6 +127,7 @@ function FormProperties({ elementInstance }: Props) {
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
       options: element.extraAttributes.options,
+      name: element.extraAttributes.name
     },
     mode: "onSubmit",
   });
@@ -141,10 +145,10 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { label, helperText, required, options } = values;
+    const { label, helperText, required, options, name } = values;
     updateElement(element.id, {
       ...element,
-      extraAttributes: { label, helperText, required, options },
+      extraAttributes: { label, helperText, required, options, name },
     });
 
     toast({
@@ -180,6 +184,38 @@ function FormProperties({ elementInstance }: Props) {
               <FormDescription>
                 The label of the field. <br /> Thsi will be displayed above the
                 field
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const formattedValue = e.target.value
+                      .replace(/\s+/g, "")
+                      .toLowerCase(); // Remove spaces and convert to lowercase
+                    form.setValue("name", formattedValue, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.currentTarget.blur();
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                Name of the element. This will be used to make reference to the
+                element.
+                <br />
+                <strong>Do not add spaces in between</strong>
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -226,7 +262,10 @@ function FormProperties({ elementInstance }: Props) {
                   className="gap-2"
                   onClick={(e) => {
                     e.preventDefault();
-                    form.setValue("options", field.value.concat(`New Option ${field.value.length}`));
+                    form.setValue(
+                      "options",
+                      field.value.concat(`New Option ${field.value.length}`)
+                    );
                   }}
                 >
                   <AiOutlinePlus />

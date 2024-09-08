@@ -13,6 +13,7 @@ const extraAttributes = {
   label: "Checkbox Field",
   helperText: "Helper Text",
   required: false,
+  name: "checkbox"
 };
 
 export type ExtraAttributesProps = FormElementInstance & {

@@ -16,7 +16,8 @@ const extraAttributes = {
   required: false,
   placeHolder: "example@email.com",
   sendNotification: false,
-  min: 10
+  min: 10,
+  name: "email"
 };
 
 export type ExtraAttributesProps = FormElementInstance & {

@@ -41,6 +41,9 @@ const FormPropertiesSchema = z.object({
     message: "Length cannot exceed 50 characters",
   }),
   min: z.number().default(0).optional(),
+  name: z.string().min(2, {
+    message: "Element name is required",
+  }),
 });
 
 type PropertiesSchemaType = z.infer<typeof FormPropertiesSchema>;
@@ -72,11 +75,11 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { label, helperText, required, placeHolder, min } = values;
+    const { label, helperText, required, placeHolder, min, name } = values;
 
     updateElement(element.id, {
       ...element,
-      extraAttributes: { label, helperText, required, placeHolder, min },
+      extraAttributes: { label, helperText, required, placeHolder, min, name },
     });
   };
 
@@ -140,6 +143,38 @@ function FormProperties({ elementInstance }: Props) {
                 />
               </FormControl>
               <FormDescription>Place holder of the field</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+            <FormField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const formattedValue = e.target.value
+                      .replace(/\s+/g, "")
+                      .toLowerCase(); // Remove spaces and convert to lowercase
+                    form.setValue("name", formattedValue, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.currentTarget.blur();
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                Name of the element. This will be used to make reference to the
+                element.
+                <br />
+                <strong>Do not add spaces in between</strong>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

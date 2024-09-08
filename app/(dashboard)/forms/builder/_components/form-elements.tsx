@@ -61,7 +61,7 @@ export type FormElement = {
 export type FormElementInstance = {
   id: string;
   type: ElementTypes;
-  extraAttributes?: Record<string, any>;
+  extraAttributes: Record<string, any>;
 };
 
 type FormElementType = {

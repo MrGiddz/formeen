@@ -40,6 +40,9 @@ const FormPropertiesSchema = z.object({
   placeHolder: z.string().max(50, {
     message: "Length cannot exceed 50 characters",
   }),
+  name: z.string().min(2, {
+    message: "Element name is required",
+  }),
   rows: z.number().min(1).max(10),
 });
 
@@ -58,6 +61,7 @@ function FormProperties({ elementInstance }: Props) {
       required: element.extraAttributes.required,
       placeHolder: element.extraAttributes.placeHolder,
       rows: element.extraAttributes.rows,
+      name: element.extraAttributes.name,
     },
     mode: "all",
   });
@@ -73,11 +77,11 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { label, helperText, required, placeHolder, rows } = values;
+    const { label, helperText, required, placeHolder, rows, name } = values;
 
     updateElement(element.id, {
       ...element,
-      extraAttributes: { label, helperText, required, placeHolder, rows },
+      extraAttributes: { label, helperText, required, placeHolder, rows, name },
     });
   };
 
@@ -147,6 +151,38 @@ function FormProperties({ elementInstance }: Props) {
         />
         <FormField
           control={control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const formattedValue = e.target.value
+                      .replace(/\s+/g, "")
+                      .toLowerCase(); // Remove spaces and convert to lowercase
+                    form.setValue("name", formattedValue, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") e.currentTarget.blur();
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                Name of the element. This will be used to make reference to the
+                element.
+                <br />
+                <strong>Do not add spaces in between</strong>
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
           name="helperText"
           render={({ field }) => (
             <FormItem>
@@ -200,6 +236,7 @@ function FormProperties({ elementInstance }: Props) {
             </FormItem>
           )}
         />
+        
         <FormField
           control={control}
           name="rows"
@@ -207,7 +244,6 @@ function FormProperties({ elementInstance }: Props) {
             <FormItem className="flex flex-col items-start justify-center rounded-lg border p-3 shadow-sm">
               <div className="space-y-0 5">
                 <FormLabel>Rows: {form.watch("rows")}</FormLabel>
-    
               </div>
               <FormControl>
                 <Slider
@@ -216,7 +252,7 @@ function FormProperties({ elementInstance }: Props) {
                   max={10}
                   step={1}
                   onValueChange={(value) => {
-                    console.log({value})
+                    console.log({ value });
                     field.onChange(value[0]);
                   }}
                 />

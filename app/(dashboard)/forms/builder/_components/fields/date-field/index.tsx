@@ -12,6 +12,7 @@ const extraAttributes = {
   label: "Date Field",
   helperText: "Pick a date",
   required: false,
+  name: "date"
 };
 
 export type ExtraAttributesProps = FormElementInstance & {

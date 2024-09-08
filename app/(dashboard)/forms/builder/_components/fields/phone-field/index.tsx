@@ -15,6 +15,9 @@ const extraAttributes = {
   required: false,
   placeHolder: "+234 801 1111 1111",
   sendNotification: false,
+  message: "",
+  name: "phone",
+  pointerVariable: "",
   min: 10
 };
 

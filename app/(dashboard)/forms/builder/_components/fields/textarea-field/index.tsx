@@ -14,6 +14,7 @@ const extraAttributes = {
   helperText: "Helper Text",
   required: false,
   placeHolder: "Enter long text...",
+  name: "textarea",
   rows: 3
 };
 

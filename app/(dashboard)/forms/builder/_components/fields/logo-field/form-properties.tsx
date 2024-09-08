@@ -58,6 +58,7 @@ function FormProperties({ elementInstance }: Props) {
     formState: { isValid },
   } = form;
 
+
   useEffect(() => {
     form.reset(element.extraAttributes);
   }, [element, form]);
@@ -122,6 +123,7 @@ function FormProperties({ elementInstance }: Props) {
                 <CldUploadWidget
                   uploadPreset="cnibnvyq"
                   onSuccess={(result) => {
+
                     const secureUrl = result.info.secure_url;
                     form.setValue("image", secureUrl, { shouldValidate: true });
                     updateElement(element.id, {

@@ -14,7 +14,7 @@ function FormComponent({
   const { title, image } = element.extraAttributes;
 
   return (
-    <div>
+    <div className="pb-4">
       <div className="relative h-32 w-full">
         <Image
           src={image}
@@ -24,7 +24,7 @@ function FormComponent({
           sizes="auto"
         />
       </div>
-      <h1 className="text-xl text-foreground">{title}</h1>
+      <h1 className="text-2xl font-semibold text-foreground py-2">{title}</h1>
     </div>
   );
 }

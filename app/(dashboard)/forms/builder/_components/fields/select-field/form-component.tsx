@@ -36,7 +36,7 @@ function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full bg-gray-50 p-4 rounded-md">
+    <div className="flex flex-col gap-4 w-full px-4 pb-1 rounded-md">
       <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
@@ -44,6 +44,7 @@ function FormComponent({
       <Select
         defaultValue={value}
         onValueChange={(value) => {
+          if(!value) return;
           setValue(value);
           if (!submitValue) return;
           const valid = SelectFieldFormElement.validate(element, value);
