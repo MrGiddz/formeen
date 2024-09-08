@@ -4,7 +4,13 @@
  * @type {string[]}
  */
 
-export const publicRoutes = ["/", "/auth/new-verification", "/api/uploadthing"];
+export const publicRoutes = [
+  "/",
+  "/auth/new-verification",
+  "/api/uploadthing",
+  "/submit",
+  "/submit",
+];
 
 /**
  * An array of routes that are accessible to the publuv
@@ -12,7 +18,14 @@ export const publicRoutes = ["/", "/auth/new-verification", "/api/uploadthing"];
  * @type {string[]}
  */
 
-export const authRoutes = ["/auth/sign-in", "/auth/sign-out", "/auth/sign-up", "/auth/error", "/auth/reset", "/auth/new-password"];
+export const authRoutes = [
+  "/auth/sign-in",
+  "/auth/sign-out",
+  "/auth/sign-up",
+  "/auth/error",
+  "/auth/reset",
+  "/auth/new-password",
+];
 
 export const SIGN_IN_LINK = "/auth/sign-in";
 

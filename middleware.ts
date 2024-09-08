@@ -1,4 +1,3 @@
-
 // import authConfig from "./auth.config";
 import {
   publicRoutes,
@@ -14,9 +13,16 @@ export default auth(async (req) => {
   const { nextUrl } = req;
   const isLogedIn = !!req.auth;
 
+  console.log(nextUrl.pathname);
+
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  // const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute = publicRoutes.some((el) =>
+    nextUrl.pathname.includes(el)
+  );
+
+  console.log({ isPublicRoute });
 
   if (isApiAuthRoute) {
     return;
@@ -44,7 +50,6 @@ export default auth(async (req) => {
 
   return;
 });
-
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
