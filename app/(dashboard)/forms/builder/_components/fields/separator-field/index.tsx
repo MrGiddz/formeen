@@ -8,6 +8,11 @@ import FormComponent from "./form-component";
 
 const type: ElementTypes = "SeparatorField";
 
+const extraAttributes = {}
+
+export type ExtraAttributesProps = FormElementInstance & {
+  extraAttributes: typeof extraAttributes;
+};
 
 
 export const SeparatorFieldFormElement: FormElement = {
@@ -15,6 +20,7 @@ export const SeparatorFieldFormElement: FormElement = {
   construct: (id: string) => ({
     id,
     type,
+    extraAttributes
   }),
   designerBtnElement: {
     icon: RiSeparator,
