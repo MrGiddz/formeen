@@ -42,7 +42,6 @@ const FormSubmit = ({ formUrl, content, formName }: FormSubmitProps) => {
     return true;
   }, [content]);
 
-
   const processField = (
     elem: FormElementInstance,
     formElements: FormElementInstance[],
@@ -96,41 +95,48 @@ const FormSubmit = ({ formUrl, content, formName }: FormSubmitProps) => {
       setSubmitted(true);
       const formElements = content as FormElementInstance[];
 
-
       formElements.forEach((elem) => {
-        console.log({type: elem.type})
+        console.log({ type: elem.type });
         switch (elem.type) {
           case "EmailField":
-            processField(
-              elem,
-              formElements,
-              formValues.current,
-              formName,
-              (recipient, updatedMessage, formName) => {
-                if (formName) {
-                  sendmail({
-                    to: recipient,
-                    fromName: formName,
-                    subject: "Registration Successful",
-                    text: updatedMessage,
-                    html: `<p>${updatedMessage}</p>`,
-                  });
+            try {
+              processField(
+                elem,
+                formElements,
+                formValues.current,
+                formName,
+                (recipient, updatedMessage, formName) => {
+                  if (formName) {
+                    sendmail({
+                      to: recipient,
+                      fromName: formName,
+                      subject: "Registration Successful",
+                      text: updatedMessage,
+                      html: `<p>${updatedMessage}</p>`,
+                    });
+                  }
                 }
-              }
-            );
+              );
+            } catch (error) {
+              console.log({ error });
+            }
             break;
 
           case "PhoneField":
-            console.log("here")
-            processField(
-              elem,
-              formElements,
-              formValues.current,
-              formName,
-              (recipient, updatedMessage) => {
-                sendSMS(updatedMessage, recipient);
-              }
-            );
+            console.log("here");
+            try {
+              processField(
+                elem,
+                formElements,
+                formValues.current,
+                formName,
+                (recipient, updatedMessage) => {
+                  sendSMS(updatedMessage, recipient);
+                }
+              );
+            } catch (error) {
+              console.log({ error });
+            }
             break;
         }
       });
