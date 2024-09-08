@@ -26,9 +26,9 @@ export default async function RootLayout({
           <NextTopLoader />
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem={true}
-            storageKey="discord-theme"
+            storageKey="cjp-theme"
           >
             {children}
             <Toaster />
