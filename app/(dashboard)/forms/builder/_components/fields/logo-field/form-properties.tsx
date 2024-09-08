@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { FormElementInstance } from "../../form-elements";
 import { ExtraAttributesProps } from ".";
-import { CldUploadWidget } from "next-cloudinary";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -57,7 +57,6 @@ function FormProperties({ elementInstance }: Props) {
     control,
     formState: { isValid },
   } = form;
-
 
   useEffect(() => {
     form.reset(element.extraAttributes);
@@ -116,24 +115,37 @@ function FormProperties({ elementInstance }: Props) {
               <FormLabel className="block">Image</FormLabel>
               <div className="w-60 h-60 relative">
                 {field.value && (
-                  <Image src={field.value} fill alt="Uploaded Image" className="object-contain" />
+                  <Image
+                    src={field.value}
+                    fill
+                    alt="Uploaded Image"
+                    className="object-contain"
+                  />
                 )}
               </div>
               <FormControl className="flex flex-col">
                 <CldUploadWidget
                   uploadPreset="cnibnvyq"
                   onSuccess={(result) => {
-
-                    const secureUrl = result.info.secure_url;
-                    form.setValue("image", secureUrl, { shouldValidate: true });
-                    updateElement(element.id, {
-                      ...element,
-                      extraAttributes: {
-                        ...element.extraAttributes,
-                        image: secureUrl,
-                      },
-                    });
-                    setResource(secureUrl); // Optionally, store resource info
+                    if (result.info) {
+                      type CustomCloudinaryUploadWidgetInfo =
+                        CloudinaryUploadWidgetInfo & {
+                          secure_url: string;
+                        };
+                      const info =
+                        result.info as CustomCloudinaryUploadWidgetInfo;
+                      const secureUrl = info.secure_url;
+                      form.setValue("image", secureUrl, {
+                        shouldValidate: true,
+                      });
+                      updateElement(element.id, {
+                        ...element,
+                        extraAttributes: {
+                          ...element.extraAttributes,
+                          image: secureUrl,
+                        },
+                      });
+                    }
                   }}
                 >
                   {({ open }) => (
