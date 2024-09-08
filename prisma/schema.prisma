@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -114,7 +114,8 @@ model Form {
   userId      String
   name        String
   description String @default("")
-  content     String @db.LongText
+  // content     String @db.LongText
+  content     String
 
   visits      Int @default(0)
   submissions Int @default(0)
