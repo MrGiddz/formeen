@@ -90,9 +90,11 @@ function FormProperties({ elementInstance }: Props) {
   const isWatchingNotification = watch("sendNotification");
   const isWatchingName = watch("name");
 
-  const formElementNames = elements.map((element) => ({
-    name: element.extraAttributes.name,
-  })).filter(elem => elem.name !== isWatchingName);
+  const formElementNames = elements
+    .map((element) => ({
+      name: element.extraAttributes.name,
+    }))
+    .filter((elem) => elem.name !== isWatchingName);
 
   useEffect(() => {
     form.reset(element.extraAttributes);
@@ -159,7 +161,7 @@ function FormProperties({ elementInstance }: Props) {
                 />
               </FormControl>
               <FormDescription>
-                The label of the field. <br /> Thsi will be displayed above the
+                The label of the field. <br /> This will be displayed above the
                 field
               </FormDescription>
               <FormMessage />
@@ -335,7 +337,11 @@ function FormProperties({ elementInstance }: Props) {
                   </FormControl>
                   <FormDescription>
                     Meaasge you want to deliver to the phone number.
-                    <p className="text-xs mt-2 text-green-700">To insert data from one of the form elements, select the name from pointer below and wrap the element name in an hashtag. e.g "Hello #fullname#" </p>
+                    <p className="text-xs mt-2 text-green-700">
+                      To insert data from one of the form elements, select the
+                      name from pointer below and wrap the element name in an
+                      hashtag. e.g <strong>Hello #fullname#</strong>
+                    </p>
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
