@@ -60,6 +60,7 @@ export async function sendmail({
   text: string;
 }) {
   try {
+    console.log("sending mail");
     const { data } = await axios.post(
       process.env.NODE_ENV === "test"
         ? `/api/mail`
