@@ -21,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
-      <html lang="en" className="dark" suppressHydrationWarning>
+      <html lang="en" className="" suppressHydrationWarning>
         <body>
           <NextTopLoader />
           <ThemeProvider
