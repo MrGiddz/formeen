@@ -61,7 +61,9 @@ export async function sendmail({
 }) {
   try {
     const { data } = await axios.post(
-      `/api/mail`,
+      process.env.NODE_ENV === "test"
+        ? `/api/mail`
+        : `${process.env.NEXT_PUBLIC_DOMAINNAME}/api/mail`,
       {
         to,
         subject,
