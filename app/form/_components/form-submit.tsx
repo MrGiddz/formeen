@@ -405,7 +405,7 @@ const FormSubmit = ({
                     <div className="p-2 bg-white">
                       <div className="w-16 h-16 relative">
                         <Image
-                          src={qrCodeUrl || "/qrcode.png"}
+                          src="/qrcode.png"
                           alt="Generated QR Code"
                           fill
                           sizes="auto"
