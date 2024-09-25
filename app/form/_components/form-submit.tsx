@@ -294,12 +294,13 @@ const FormSubmit = ({
         )}
       >
         <div className="max-w-3xl flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto border shadow-xl rounded">
-          <h1 className="text-2xl font-bold z-50">Form Submitted</h1>
-          <p className="text-muted-foreground z-50">
+          <h1 className="text-xl md:text-2xl font-bold z-50">Form Submitted</h1>
+          <p className="text-muted-foreground z-50 text-xs md:text-sm">
             Thank you for submitting the form, you can close the form now
           </p>
-          <div ref={imageRef} className="h-full w-fullrelative">
-            <div className="h-[410px] w-full contain-size border border-gray-100 overflow-hidden">
+          
+          <div ref={imageRef} className="h-full w-full relative overflow-scroll">
+            <div className="w-[600px] h-[410px] contain-size border border-gray-100 overflow-hidden">
               <div className="h-[410px] flex flex-col justify-start items-start bg-[#2E3192] relative">
                 <div className="absolute w-full h-full bg-white rounded-t-[100px] rounded-b-[230px] top-[-20%] right-[-15%] -z-0">
                   <div className="w-full h-full relative">
