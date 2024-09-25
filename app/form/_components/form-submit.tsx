@@ -243,13 +243,18 @@ const FormSubmit = ({
               fetch(dataUrl)
                 .then((res) => res.blob())
                 .then((blob) => {
-                  const file = new File([blob], `${userName} | Super Sunday Africana 2.1.png`, {
-                    type: blob.type,
-                  });
+                  const file = new File(
+                    [blob],
+                    `${userName} | Super Sunday Africana 2.1.png`,
+                    {
+                      type: blob.type,
+                    }
+                  );
 
                   navigator
                     .share({
-                      title: "You are invited to the Special Afircan Praise Sunday",
+                      title:
+                        "You are invited to the Special Afircan Praise Sunday",
                       text: "Super Sunday Africana 2.1",
                       files: [file],
                     })
@@ -298,8 +303,11 @@ const FormSubmit = ({
           <p className="text-muted-foreground z-50 text-xs md:text-sm">
             Thank you for submitting the form, you can close the form now
           </p>
-          
-          <div ref={imageRef} className="h-full w-full relative overflow-scroll">
+
+          <div
+            ref={imageRef}
+            className="h-full w-full relative overflow-scroll"
+          >
             <div className="w-[600px] h-[410px] contain-size border border-gray-100 overflow-hidden">
               <div className="h-[410px] flex flex-col justify-start items-start bg-[#2E3192] relative">
                 <div className="absolute w-full h-full bg-white rounded-t-[100px] rounded-b-[230px] top-[-20%] right-[-15%] -z-0">
@@ -413,7 +421,9 @@ const FormSubmit = ({
                 <div className="text-center w-full">
                   <p className="text-center text-xs text-white self-center">
                     <span>Register: </span>{" "}
-                    {`${window.location.origin}/form/${formUrl}`}
+                    <a href="https://bit.ly/SuperSundayAfricana2-1">
+                      https://bit.ly/SuperSundayAfricana2-1
+                    </a>
                   </p>
                 </div>
               </div>
