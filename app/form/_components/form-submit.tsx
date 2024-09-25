@@ -233,7 +233,7 @@ const FormSubmit = ({
 
             // Download the image
             const link = document.createElement("a");
-            link.download = "capture.png";
+            link.download = `${userName} | Super Sunday Africana 2.1.png`;
             link.href = dataUrl;
             link.click();
 
@@ -243,7 +243,7 @@ const FormSubmit = ({
               fetch(dataUrl)
                 .then((res) => res.blob())
                 .then((blob) => {
-                  const file = new File([blob], "capture.png", {
+                  const file = new File([blob], `${userName} | Super Sunday Africana 2.1.png`, {
                     type: blob.type,
                   });
 
@@ -422,7 +422,7 @@ const FormSubmit = ({
           <div className="flex justify-between items-center gap-1 w-full">
             <Button
               className="bg-[#2E3192] hover:text-white group text-xs font-light"
-              onClick={handleShare}
+              onClick={handleDownload}
             >
               Share{" "}
               <Share2Icon className="w-4 h-4 pl-1 group-hover:text-white" />

@@ -245,8 +245,6 @@ export async function SubmitForm(
   jsonContent: string
 ): Promise<Form | null> {
 
-  console.log({jsonContent})
-
   const form = await db.form.update({
     where: {
       shareURL: formUrl,
@@ -263,6 +261,8 @@ export async function SubmitForm(
       },
     },
   });
+
+  console.log({form})
 
   return form;
 }
