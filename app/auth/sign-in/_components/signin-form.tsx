@@ -24,8 +24,8 @@ import Link from "next/link";
 import CardWrapper from "@/app/auth/_components/auth-card-wrapper";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { lato400 } from "@/styles/fonts";
 import Password from "../../_components/password";
+import { Lato } from "@/styles/fonts";
 
 type LoginType = z.infer<typeof LoginSchema>;
 
@@ -162,8 +162,8 @@ const SignInForm = () => {
                         </FormControl>
                         <FormLabel
                           className={cn(
-                            "!m-0 text-xs md:text-sm",
-                            lato400.className
+                            "!m-0 text-xs md:text-sm font-normal",
+                            Lato.className
                           )}
                         >
                           Remember for 30 days
@@ -180,7 +180,7 @@ const SignInForm = () => {
                     asChild
                     className={cn(
                       "!m-0 text-xs md:text-sm px-0 flex justify-end",
-                      lato400.className
+                      Lato.className
                     )}
                   >
                     <Link href="/auth/reset">Forgot Password?</Link>

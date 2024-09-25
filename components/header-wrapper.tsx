@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { lato400, trap500, trap600 } from "@/styles/fonts";
 import { Label } from "./ui/label";
 import React from "react";
 

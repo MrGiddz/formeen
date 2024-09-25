@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { lato400, trap500, trap600 } from "@/styles/fonts";
+import { Lato, trap600 } from "@/styles/fonts";
 import { Label } from "./ui/label";
 import React from "react";
 import HeaderWrapper from "./header-wrapper";
@@ -44,7 +44,7 @@ const Header = ({
       >
         {title}
       </h1>
-      <Label className={cn("dark:text-slate-100", lato400.className, labelStyles)}>{label}</Label>
+      <Label className={cn("dark:text-slate-100 font-normal", Lato.className, labelStyles)}>{label}</Label>
     </HeaderWrapper>
   );
 };
