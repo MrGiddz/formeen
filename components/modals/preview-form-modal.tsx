@@ -16,16 +16,16 @@ type PreviewFormModalType = z.infer<typeof PreviewFormSchema>;
 const PreviewFormModal = () => {
   const { toast } = useToast();
   const { isOpen, onClose, type, data } = useModal();
-  const { elements } = data;
+  const { elements, description } = data;
 
-  console.log({elementsPreview: elements})
+  console.log({ elementsPreview: elements });
 
   const isModalOpen = isOpen && type === "previewForm";
   const form = useForm<PreviewFormModalType>({
     resolver: zodResolver(PreviewFormSchema),
     defaultValues: {
       name: "",
-      description: "",
+      description: description,
     },
   });
 
@@ -62,11 +62,21 @@ const PreviewFormModal = () => {
         </p>
       </div>
       <div className="bg-accent flex flex-col flex-grow items-center justify-center p-4 bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)] overflow-y-auto">
-        <div className="flex flex-col w-full max-w-[620px] gap-4 flex-grow bg-background h-full rounded-2xl p-8 overflow-y-auto">
-          {elements?.map((element) => {
-            const FormComponent = FormElements[element.type].formComponent;
-            return <FormComponent key={element.id} elementInstance={element} />;
-          })}
+        <div className="flex flex-col w-full max-w-[620px] max-h-[700px] gap-4 flex-grow bg-background h-full rounded-2xl">
+          <div className="overflow-y-auto">
+            {elements?.map((element) => {
+              const FormComponent = FormElements[element.type].formComponent;
+              return (
+                <FormComponent
+                  key={element.id}
+                  elementInstance={element}
+                  formDescription={
+                    element.type === "BannerField" ? description : undefined
+                  }
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </Modal>

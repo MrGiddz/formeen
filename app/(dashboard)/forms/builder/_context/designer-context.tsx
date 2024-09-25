@@ -10,7 +10,11 @@ type DesignerContextType = {
   formId: string;
   setFormId: (formId: string) => void;
   setElements: (elements: FormElementInstance[]) => void;
-  addElement: (index: number, element: FormElementInstance, id?: string) => void;
+  addElement: (
+    index: number,
+    element: FormElementInstance,
+    id?: string
+  ) => void;
   removeElement: (id: string) => void;
   selectedElement: FormElementInstance | null;
   setSelectedElement: (element: FormElementInstance | null) => void;
@@ -25,7 +29,7 @@ const useDesigner = create<DesignerContextType>((set) => ({
   setFormId: (formId: string) => {
     set((state) => ({
       formId,
-    }))
+    }));
   },
   setElements: (elements: FormElementInstance[]) =>
     set((state) => ({
@@ -36,13 +40,15 @@ const useDesigner = create<DesignerContextType>((set) => ({
       const newElement = [...state.elements];
       newElement.splice(index, 0, element);
 
-     (async () => {
-        await UpdateFormContent(state.formId, JSON.stringify(newElement))
-      })().then(() => {
-        console.log("Designer element updated successfully")
-      }).catch(() => {
-        console.error("An error occurred while updating designer element")
-      })
+      (async () => {
+        await UpdateFormContent(state.formId, JSON.stringify(newElement));
+      })()
+        .then(() => {
+          console.log("Designer element updated successfully");
+        })
+        .catch(() => {
+          console.error("An error occurred while updating designer element");
+        });
 
       return {
         elements: newElement,
@@ -65,6 +71,20 @@ const useDesigner = create<DesignerContextType>((set) => ({
       const newElements = [...state.elements];
       const index = newElements.findIndex((element) => element.id === id);
       newElements[index] = element;
+      const formId = state.formId;
+
+      console.log({formId: formId})
+
+      if (formId) {
+        const jsonElements = JSON.stringify(newElements);
+        // console.log({jsonElements})
+        UpdateFormContent(id, jsonElements)
+          .then((data) => {})
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
       return {
         elements: newElements,
       };
@@ -85,7 +105,7 @@ export default function DesignerContextProvider({
     updateElement,
     setElements,
     formId,
-    setFormId
+    setFormId,
   } = useDesigner();
 
   return (
@@ -99,7 +119,7 @@ export default function DesignerContextProvider({
         updateElement,
         setElements,
         formId,
-        setFormId
+        setFormId,
       }}
     >
       {children}

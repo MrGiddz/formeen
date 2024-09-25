@@ -12,8 +12,10 @@ import { CSS } from "@dnd-kit/utilities";
 
 const DesignerElementWrapper = ({
   element,
+  formDescription
 }: {
   element: FormElementInstance;
+  formDescription?: string;
 }) => {
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const {
@@ -57,7 +59,7 @@ const DesignerElementWrapper = ({
     // <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
     <div
       ref={draggable.setNodeRef}
-      className="relative h-[120px] flex -flex-col text-foreground"
+      className="relative flex flex-col text-foreground"
       onMouseEnter={(e) => {
         setMouseIsOver(true);
       }}
@@ -106,11 +108,11 @@ const DesignerElementWrapper = ({
       )}
       <div
         className={cn(
-          "flex w-full h-full items-center rounded-md bg-gray-50 px-4 py-2 pointer-events-none opacity-100",
+          "flex w-full h-full items-center rounded-md bg-gray-50 pointer-events-none opacity-100",
           mouseIsOver && "opacity-40"
         )}
       >
-        <DesignerElement elementInstance={element} />
+        <DesignerElement elementInstance={element} formDescription={formDescription} />
       </div>
       <div
         ref={bottomHalf.setNodeRef}

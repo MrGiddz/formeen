@@ -11,7 +11,7 @@ function DesignerComponent({
   const element = elementInstance as ExtraAttributesProps;
   const { subtitle } = element.extraAttributes;
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full p-4">
       <Label className="text-muted-foreground">Sub-Title Field</Label>
       <p className="text-base">{subtitle}</p>
     </div>

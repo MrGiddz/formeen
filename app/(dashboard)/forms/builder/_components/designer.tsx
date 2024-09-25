@@ -11,9 +11,11 @@ import { useDesigner } from "../_hooks/use-designer";
 import { idGenerator } from "../_lib/idGenerator";
 import DesignerElementWrapper from "./designer-element-wrapper";
 
-type Props = {};
+type Props = {
+  formDescription?: string;
+};
 
-function Designer({}: Props) {
+function Designer({formDescription}: Props) {
   const {
     elements,
     addElement,
@@ -143,13 +145,13 @@ function Designer({}: Props) {
           )}
           {droppable.isOver && elements.length === 0 && (
             <div className="p-4 w-full">
-              <div className="h-[120px] rounded-md bg-foreground/60"></div>
+              <div className="h-[150px] rounded-md bg-foreground/60"></div>
             </div>
           )}
           {elements.length > 0 && (
             <div className="flex flex-col w-full gap-2 p-4">
               {elements.map((e) => (
-                <DesignerElementWrapper key={e.id} element={e} />
+                <DesignerElementWrapper key={e.id} element={e} formDescription={formDescription}  />
               ))}
             </div>
           )}

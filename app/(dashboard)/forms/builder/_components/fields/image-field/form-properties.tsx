@@ -20,13 +20,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Switch } from "@/components/ui/switch";
 
 type Props = {
   elementInstance: FormElementInstance;
 };
 
 const FormPropertiesSchema = z.object({
-  title: z
+  text: z
     .string()
     .min(2, {
       message: "Minimum length of 2 characters is required",
@@ -35,6 +36,7 @@ const FormPropertiesSchema = z.object({
       message: "Length cannot exceed 50 characters",
     }),
   image: z.string(),
+  required: z.boolean().default(false),
 });
 
 type PropertiesSchemaType = z.infer<typeof FormPropertiesSchema>;
@@ -47,8 +49,8 @@ function FormProperties({ elementInstance }: Props) {
   const form = useForm<PropertiesSchemaType>({
     resolver: zodResolver(FormPropertiesSchema),
     defaultValues: {
-      title: element.extraAttributes.title,
-      image: element.extraAttributes.image,
+      text: element.extraAttributes.text,
+      required: element.extraAttributes.required,
     },
     mode: "all",
   });
@@ -63,11 +65,11 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { title, image } = values;
+    const { text, required } = values;
 
     updateElement(element.id, {
       ...element,
-      extraAttributes: { title, image },
+      extraAttributes: { text, required },
     });
   };
 
@@ -86,7 +88,7 @@ function FormProperties({ elementInstance }: Props) {
       >
         <FormField
           control={control}
-          name="title"
+          name="text"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Title</FormLabel>
@@ -94,7 +96,7 @@ function FormProperties({ elementInstance }: Props) {
                 <Input
                   {...field}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    form.setValue("title", e.target.value, {
+                    form.setValue("text", e.target.value, {
                       shouldValidate: true,
                     });
                   }}
@@ -109,51 +111,27 @@ function FormProperties({ elementInstance }: Props) {
         />
         <FormField
           control={control}
-          name="image"
+          name="required"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="block">Image</FormLabel>
-              <div className="w-60 h-60 relative">
-                {field.value && (
-                  <Image
-                    src={field.value}
-                    fill
-                    alt="Uploaded Image"
-                    className="object-contain"
-                  />
-                )}
+            <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
+              <div className="space-y-0 5">
+                <FormLabel>Required</FormLabel>
+                <FormDescription>
+                  Helper text of the field <br />
+                  It will be displayed below the field.
+                </FormDescription>
               </div>
-              <FormControl className="flex flex-col">
-                <CldUploadWidget
-                  uploadPreset="cnibnvyq"
-                  onSuccess={(result) => {
-                    if (result.info) {
-                      type CustomCloudinaryUploadWidgetInfo =
-                        CloudinaryUploadWidgetInfo & {
-                          secure_url: string;
-                        };
-                      const info =
-                        result.info as CustomCloudinaryUploadWidgetInfo;
-                      const secureUrl = info.secure_url;
-                      form.setValue("image", secureUrl, {
-                        shouldValidate: true,
-                      });
-                      updateElement(element.id, {
-                        ...element,
-                        extraAttributes: {
-                          ...element.extraAttributes,
-                          image: secureUrl,
-                        },
-                      });
-                    }
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={(e) => {
+                    form.setValue("required", e, {
+                      shouldValidate: true,
+                    });
+                    // field.onChange
                   }}
-                >
-                  {({ open }) => (
-                    <Button onClick={() => open()}>Upload an Image</Button>
-                  )}
-                </CldUploadWidget>
+                />
               </FormControl>
-              <FormDescription>The image of the logo.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

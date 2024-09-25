@@ -14,7 +14,7 @@ function SaveFormBtn({id}: Props) {
   const {elements} = useDesigner()
   const [loading, startTransition] = useTransition();
 
-  const updateFormContent = async() => {
+  const saveFormContent = async() => {
     try {
       const jsonElements = JSON.stringify(elements)
       await UpdateFormContent(id, jsonElements)
@@ -32,7 +32,7 @@ function SaveFormBtn({id}: Props) {
   }
   return (
     <Button variant="outline" className="gap-x-2" onClick={() => {
-      startTransition(updateFormContent)
+      startTransition(saveFormContent)
     }}>
       <HiSaveAs className="h-6 w-6" />
       Save

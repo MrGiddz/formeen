@@ -1,6 +1,3 @@
-"use client";
-
-import { MdTextFields } from "react-icons/md";
 import {
   ElementTypes,
   FormElement,
@@ -9,21 +6,20 @@ import {
 import DesignerComponent from "./designer-component";
 import FormProperties from "./form-properties";
 import FormComponent from "./form-component";
-import { LuHeading1 } from "react-icons/lu";
 import { ImageIcon } from "lucide-react";
 
-const type: ElementTypes = "LogoField";
+const type: ElementTypes = "ImageField";
 
 const extraAttributes = {
-  title: "Logo Title",
-  image: ""
+  image: "",
+  text: "Image Text"
 };
 
 export type ExtraAttributesProps = FormElementInstance & {
   extraAttributes: typeof extraAttributes;
 };
 
-export const LogoFieldFormElement: FormElement = {
+export const ImageFieldElement: FormElement = {
   type,
   construct: (id: string) => ({
     id,
@@ -32,7 +28,7 @@ export const LogoFieldFormElement: FormElement = {
   }),
   designerBtnElement: {
     icon: ImageIcon,
-    label: "Logo Title",
+    label: "Image",
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,

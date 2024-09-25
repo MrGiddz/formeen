@@ -15,7 +15,7 @@ function FormComponent({
 
 
   return (
-    <h1 className="text-xl text-foreground">{title}</h1>
+    <h1 className="text-xl px-6 text-foreground text-[#2E3192]">{title}</h1>
   );
 }
 

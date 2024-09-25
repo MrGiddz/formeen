@@ -29,15 +29,19 @@ function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full px-4 pb-1 rounded-md">
-      <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
+    <div className="flex flex-col gap-4 w-full px-6 py-4 mb-2 rounded-md">
+      <Label
+        className={cn(
+          error ? "text-rose-500" : "text-foreground text-[#2E3192]"
+        )}
+      >
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
       </Label>
       <Input
         placeholder={placeHolder}
         className={cn(
-          "ring-foreground text-foreground border-foreground/40 placeholder:text-foreground/80",
+          "ring-foreground text-foreground border-foreground/40 placeholder:text-gray-300",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
         onChange={(e) => {
@@ -47,7 +51,6 @@ function FormComponent({
           setError(!valid);
           if (!valid) return;
           submitValue(element.id, e.target.value);
-
         }}
         onBlur={(e) => {
           if (!submitValue) return;

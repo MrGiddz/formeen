@@ -15,7 +15,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
 import { useAuth } from "@/hooks/use-auth";
-import { inter400, lato700 } from "@/styles/fonts";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import { HiOutlineLogout } from "react-icons/hi";
 import { usePathname } from "next/navigation";
@@ -25,6 +24,7 @@ import UserButtonMenu from "./user-button-menu";
 import { UserAvatar } from "./user-avatar";
 import { AvatarIcon } from "@radix-ui/react-icons";
 import { ActionTooltip } from "./action-tooltip";
+import { Lato } from "@/styles/fonts";
 
 type UserButtonProps = {
   userButtonMenu?: ReactElement<typeof DropdownMenuContent>;
@@ -33,8 +33,6 @@ type UserButtonProps = {
 
 function UserButtonElement({ userButtonMenu, apperarnce }: UserButtonProps) {
   const user = useAuth();
-
-
 
   return (
     <DropdownMenu>
@@ -61,8 +59,22 @@ function UserButtonElement({ userButtonMenu, apperarnce }: UserButtonProps) {
                   {apperarnce === "user-info" && user && (
                     <>
                       <div className="flex flex-col items-start justify-start mx-1">
-                        <h2 className={cn("text-xs font-semibold",lato700.className)}>{user?.name}</h2>
-                        <p  className={cn("text-xs",lato700.className)}>{user?.email}</p>
+                        <h2
+                          className={cn(
+                            "text-xs font-extrabold",
+                            Lato.className
+                          )}
+                        >
+                          {user?.name}
+                        </h2>
+                        <p
+                          className={cn(
+                            "text-xs font-extrabold",
+                            Lato.className
+                          )}
+                        >
+                          {user?.email}
+                        </p>
                       </div>
 
                       <PiCaretCircleDown className="w-5 h-5 group-aria-expanded:rotate-[900deg] duration-300" />

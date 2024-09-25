@@ -28,7 +28,8 @@ type Props = {
 };
 
 function FormBuilder({ form }: Props) {
-  const { elements, setElements, setSelectedElement, setFormId } = useDesigner();
+  const { elements, setElements, setSelectedElement, setFormId } =
+    useDesigner();
   const [isReady, setIsReady] = useState<boolean>(false);
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -48,10 +49,10 @@ function FormBuilder({ form }: Props) {
     try {
       const elements = JSON.parse(form.content);
       setElements(elements);
-      setSelectedElement(null)
-      setFormId(form.id)
+      setSelectedElement(null);
+      setFormId(form.id);
     } catch (error) {
-      console.log({error})
+      console.log({ error });
     }
 
     const readyTimeout = setTimeout(() => setIsReady(true), 500);
@@ -68,11 +69,15 @@ function FormBuilder({ form }: Props) {
 
   const shareUrl = `${form.shareURL}`;
 
-
   if (form.published) {
     return (
       <>
-        <Confetti recycle={false} numberOfPieces={3000} width={window.innerWidth} height={window.innerHeight} />
+        <Confetti
+          recycle={false}
+          numberOfPieces={3000}
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
         <div className="flex flex-col items-center justify-center h-full w-full">
           <div className="max-w-md">
             <h1 className="text-center text-4xl my-3 font-bold text-primary pb-2 mb-18">
@@ -112,7 +117,7 @@ function FormBuilder({ form }: Props) {
               {form.name}
             </h2>
             <div className="flex items-center gap-2">
-              <PreviewDialogBtn />
+              <PreviewDialogBtn description={form.description} />
               {!form.published && (
                 <>
                   <SaveFormBtn id={form.id} />
@@ -122,7 +127,7 @@ function FormBuilder({ form }: Props) {
             </div>
           </nav>
           <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-            <Designer />
+            <Designer  />
           </div>
         </main>
       </SortableContext>

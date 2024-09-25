@@ -36,15 +36,15 @@ function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full px-4 pb-1 rounded-md">
-      <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
+    <div className="flex flex-col gap-4 w-full px-6 py-4 mb-2 rounded-md">
+      <Label className={cn(error ? "text-rose-500" : "text-foreground text-[#2E3192]")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
       </Label>
       <Select
         defaultValue={value}
         onValueChange={(value) => {
-          if(!value) return;
+          if (!value) return;
           setValue(value);
           if (!submitValue) return;
           const valid = SelectFieldFormElement.validate(element, value);

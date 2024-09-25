@@ -10,13 +10,15 @@ import { TextareaFieldFormElement } from "./fields/textarea-field";
 import { DateFieldFormElement } from "./fields/date-field";
 import { SelectFieldFormElement } from "./fields/select-field";
 import { CheckboxFieldFormElement } from "./fields/checkbox-field";
-import { LogoFieldFormElement } from "./fields/logo-field";
+import { BannerFieldFormElement } from "./fields/banner-field";
 import { PhoneFieldFormElement } from "./fields/phone-field";
 import { EmailFieldFormElement } from "./fields/email-field";
 import { RadioFieldFormElement } from "./fields/radio-field";
+import { ImageFieldElement } from "./fields/image-field";
 
 export type ElementTypes =
-  | "LogoField"
+  | "BannerField"
+  | "ImageField"
   | "TextField"
   | "TitleField"
   | "RadioField"
@@ -38,19 +40,20 @@ export type FormElement = {
   type: ElementTypes;
 
   construct: (id: string) => FormElementInstance;
-
   designerBtnElement: {
     icon: React.ElementType;
     label: string;
   };
   designerComponent: React.FC<{
     elementInstance: FormElementInstance;
+    formDescription?: string;
   }>;
   formComponent: React.FC<{
     elementInstance: FormElementInstance;
     submitValue?: SubmitFunctionType;
     isInvalid?: boolean;
     defaultValue?: string;
+    formDescription?: string;
   }>;
   propertiesComponent: React.FC<{
     elementInstance: FormElementInstance;
@@ -61,6 +64,7 @@ export type FormElement = {
 export type FormElementInstance = {
   id: string;
   type: ElementTypes;
+
   extraAttributes: Record<string, any>;
 };
 
@@ -80,8 +84,9 @@ export const FormElements: FormElementType = {
   DateField: DateFieldFormElement,
   SelectField: SelectFieldFormElement,
   CheckboxField: CheckboxFieldFormElement,
-  LogoField: LogoFieldFormElement,
+  BannerField: BannerFieldFormElement,
   PhoneField: PhoneFieldFormElement,
   EmailField: EmailFieldFormElement,
-  RadioField: RadioFieldFormElement
+  RadioField: RadioFieldFormElement,
+  ImageField: ImageFieldElement,
 };

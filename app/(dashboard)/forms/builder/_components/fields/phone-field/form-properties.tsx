@@ -319,7 +319,7 @@ function FormProperties({ elementInstance }: Props) {
                     <Textarea
                       placeholder="Your message"
                       className={cn(
-                        "ring-foreground text-foreground border-foreground/40 placeholder:text-foreground/80"
+                        "ring-foreground text-foreground border-foreground/40 placeholder:text-gray-300"
                       )}
                       onChange={(e) => {
                         form.setValue("message", e.target.value, {
@@ -362,6 +362,7 @@ function FormProperties({ elementInstance }: Props) {
                           shouldValidate: false,
                         });
                       }}
+                      defaultValue={field.value}
                     >
                       <SelectTrigger
                         className={cn(

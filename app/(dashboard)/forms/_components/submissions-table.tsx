@@ -3,17 +3,7 @@ import {
   ElementTypes,
   FormElementInstance,
 } from "../builder/_components/form-elements";
-import { ElementType } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { formatDistance } from "date-fns";
-import RowCell from "./row-cell";
+import DataTable from "./data-table";
 
 type Row = { [key: string]: string } & {
   submittedAt: Date;
@@ -44,10 +34,10 @@ const SubmissionsTable = async ({ id }: { id: string }) => {
   for (const element of formElements) {
     switch (element.type) {
       case "TextField":
-        case "EmailField":
-          case "PhoneField":
-        case "DateField":
-          case "NumberField":
+      case "EmailField":
+      case "PhoneField":
+      case "DateField":
+      case "NumberField":
       case "CheckboxField":
       case "RadioField":
       case "SelectField":
@@ -74,45 +64,8 @@ const SubmissionsTable = async ({ id }: { id: string }) => {
       submittedAt: submission.createdAt,
     });
   }
-  return (
-    <>
-      <h1 className="text-2xl font-bold my-4">Submissions</h1>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {columns.map((column) => (
-                <TableHead key={column.id} className="uppercase">
-                  {column.label}
-                </TableHead>
-              ))}
-              <TableHead className="text-muted-foreground text-right uppercase">
-                Submitted at
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.map((row, index) => (
-              <TableRow key={index}>
-                {columns.map((column) => (
-                  <RowCell
-                    key={column.id}
-                    type={column.type}
-                    value={row[column.id]}
-                  />
-                ))}
-                <TableCell className="text-muted-foreground text-right">
-                  {formatDistance(row.submittedAt, new Date(), {
-                    addSuffix: true,
-                  })}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    </>
-  );
+
+  return <DataTable columns={columns} rows={rows} />;
 };
 
 export default SubmissionsTable;

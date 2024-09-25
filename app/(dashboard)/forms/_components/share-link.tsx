@@ -19,7 +19,7 @@ const ShareLink = ({ shareUrl }: { shareUrl: string }) => {
   if (!mounted) {
     return <Skeleton className="h-9 w-full" />;
   }
-  const shareLink = `${window.location.origin}/submit/${shareUrl}`;
+  const shareLink = `${window.location.origin}/form/${shareUrl}`;
   return (
     <ActionTooltip label={!isCopied ? "Copy" : "Copied"} side="right">
       <div className="relative my-4 flex gap-2 items-center w-full h-9 pb-4">

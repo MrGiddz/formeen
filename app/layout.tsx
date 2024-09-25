@@ -6,6 +6,8 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader"
+import { cn } from "@/lib/utils";
+import { Inter } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
-      <html lang="en" className="" suppressHydrationWarning>
+      <html lang="en" className={cn(Inter.className)} suppressHydrationWarning>
         <body>
           <NextTopLoader />
           <ThemeProvider

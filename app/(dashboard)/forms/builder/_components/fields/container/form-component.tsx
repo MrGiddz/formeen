@@ -27,7 +27,7 @@ function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex flex-col gap-4 w-full px-4 pb-1 rounded-md">
+    <div className="flex flex-col gap-4 w-full px-4 py-4 mb-2 rounded-md">
       <Label className={cn(error ? "text-rose-500" : "text-foreground")}>
         {label}
         {required && <span className="text-destructive ml-2">*</span>}
@@ -35,7 +35,7 @@ function FormComponent({
       <Input
         placeholder={placeHolder}
         className={cn(
-          "ring-foreground border-foreground/40 placeholder:text-foreground/80",
+          "ring-foreground border-foreground/40 placeholder:text-gray-300",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
         onChange={(e) => setValue(e.target.value)}

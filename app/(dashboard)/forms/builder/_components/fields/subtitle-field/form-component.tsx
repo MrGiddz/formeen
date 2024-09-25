@@ -10,7 +10,7 @@ function FormComponent({
   const element = elementInstance as ExtraAttributesProps;
   const { subtitle } = element.extraAttributes;
 
-  return <p className="text-base text-foreground">{subtitle}</p>;
+  return <p className="text-base text-foreground px-6">{subtitle}</p>;
 }
 
 export default FormComponent;

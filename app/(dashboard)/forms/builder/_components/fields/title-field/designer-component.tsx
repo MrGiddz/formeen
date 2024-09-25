@@ -11,8 +11,10 @@ function DesignerComponent({
   const element = elementInstance as ExtraAttributesProps;
   const { title } = element.extraAttributes;
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <Label className="text-muted-foreground">Title Field</Label>
+    <div className="flex flex-col gap-2 w-full p-4">
+      <Label className="text-muted-foreground text-[#2E3192]">
+        Title Field
+      </Label>
       <h1 className="text-xl text-foreground">{title}</h1>
     </div>
   );

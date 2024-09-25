@@ -10,12 +10,12 @@ import {
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { inter400, lato700 } from "@/styles/fonts";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { HiOutlineLogout } from "react-icons/hi";
 import { signOut } from "next-auth/react";
+import { Inter, Lato } from "@/styles/fonts";
 
 const UserButtonMenu = () => {
   const user = useAuth();
@@ -63,7 +63,7 @@ const UserButtonMenu = () => {
           </DropdownMenuLabel>
 
           <DropdownMenuGroup className="pb-2">
-            <DropdownMenuItem className={cn(inter400.className)} asChild>
+            <DropdownMenuItem className={cn(Inter.className)} asChild>
               <Link
                 href="/profile"
                 className={cn(pathname === "/profile" && "text-primary-60")}
@@ -73,7 +73,7 @@ const UserButtonMenu = () => {
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem className={cn(inter400.className)} asChild>
+            <DropdownMenuItem className={cn(Inter.className)} asChild>
               <Link
                 href="/settings"
                 className={cn(pathname === "/settings" && "text-primary-60")}
@@ -100,16 +100,16 @@ const UserButtonMenu = () => {
               <div className="flex flex-col items-start justify-start mx-1">
                 <h2
                   className={cn(
-                    "text-xs/7 leading-3 group-hover:text-primary/90",
-                    lato700.className
+                    "text-xs/7 leading-3 group-hover:text-primary/90 font-extrabold",
+                    Lato.className
                   )}
                 >
                   {user?.name}
                 </h2>
                 <p
                   className={cn(
-                    "text-xs/7 leading-3 text-grey group-hover:text-primary/90",
-                    lato700.className
+                    "text-xs/7 leading-3 text-grey group-hover:text-primary/90 font-extrabold",
+                    Lato.className
                   )}
                 >
                   {user?.email}

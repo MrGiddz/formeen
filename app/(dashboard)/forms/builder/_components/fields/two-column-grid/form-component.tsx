@@ -23,7 +23,7 @@ function FormComponent({
   const [error, setError] = useState(false);
   const { label, placeHolder, helperText, required } = element.extraAttributes;
 
-  console.log({ defaultValue });
+
   useEffect(() => {
     setError(isInvalid === true);
   }, [isInvalid]);
@@ -37,7 +37,7 @@ function FormComponent({
       <Input
         placeholder={placeHolder}
         className={cn(
-          "ring-foreground border-foreground/40 placeholder:text-foreground/80",
+          "ring-foreground border-foreground/40 placeholder:text-gray-300",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
         onChange={(e) => setValue(e.target.value)}

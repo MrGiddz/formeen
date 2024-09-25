@@ -4,7 +4,8 @@ import { create } from "zustand";
 export type ModalType = "createForm" | "previewForm";
 
 interface ModalData {
-  elements?: FormElementInstance[]
+  elements?: FormElementInstance[],
+  description?: string
 }
 interface useModalProps {
   type: ModalType | null;

@@ -10,7 +10,7 @@ function FormComponent({
   const element = elementInstance as ExtraAttributesProps;
   const { paragraph } = element.extraAttributes;
 
-  return <p className="text-sm text-foreground">{paragraph}</p>;
+  return <p className="text-sm px-6 text-foreground text-[#2E3192]">{paragraph}</p>;
 }
 
 export default FormComponent;

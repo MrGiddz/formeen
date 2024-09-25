@@ -16,7 +16,7 @@ function DesignerComponent({
       <Checkbox id={id} />
 
       <div className="grid gap-1.5 leading-none">
-        <Label htmlFor={id}>
+        <Label htmlFor={id} className="text-[#2E3192]">
           {label}
           {required && <span className="text-destructive ml-2">*</span>}
         </Label>

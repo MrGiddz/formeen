@@ -1,7 +1,7 @@
 import { GetFormByFormUrl, GetFormById } from "@/actions/form";
 import { FormElementInstance } from "@/app/(dashboard)/forms/builder/_components/form-elements";
-import FormSubmit from "@/app/submit/_components/form-submit";
 import React from "react";
+import FormSubmit from "../_components/form-submit";
 
 async function SubmitPage({ params }: { params: { formUrl: string } }) {
   const { formUrl } = params;
@@ -9,8 +9,18 @@ async function SubmitPage({ params }: { params: { formUrl: string } }) {
   if (!form) {
     throw new Error("Form not found");
   }
+
+  console.log({ description: form.description });
   const formContent = JSON.parse(form.content) as FormElementInstance[];
-  return <FormSubmit formUrl={formUrl} content={formContent} formName={form.name} />;
+
+  return (
+    <FormSubmit
+      formUrl={formUrl}
+      content={formContent}
+      formName={form.name}
+      description={form.description}
+    />
+  );
 }
 
 export default SubmitPage;

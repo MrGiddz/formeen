@@ -145,6 +145,7 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
+    
     const { label, helperText, required, options, name } = values;
     updateElement(element.id, {
       ...element,
@@ -172,6 +173,7 @@ function FormProperties({ elementInstance }: Props) {
                 <Input
                   {...field}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+
                     form.setValue("label", e.target.value, {
                       shouldValidate: true,
                     });

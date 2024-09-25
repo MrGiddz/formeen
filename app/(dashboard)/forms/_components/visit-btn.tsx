@@ -15,7 +15,7 @@ const VisitButton = ({ shareUrl }: { shareUrl: string }) => {
     return  <Skeleton className="h-9 w-[200px]" />;;
   }
 
-  const shareLink = `${window.location.origin}/submit/${shareUrl}`;
+  const shareLink = `${window.location.origin}/form/${shareUrl}`;
   return (
     <Button
       className="w-[200px]"

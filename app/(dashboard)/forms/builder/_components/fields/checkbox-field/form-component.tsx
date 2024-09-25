@@ -29,7 +29,7 @@ function FormComponent({
   }, [isInvalid]);
 
   return (
-    <div className="flex items-top space-x-2 pb-1">
+    <div className="flex items-top space-x-2 pb-1 px-6">
       <Checkbox
         id={id}
         checked={value}
@@ -51,7 +51,7 @@ function FormComponent({
       <div className="grid gap-1.5 leading-none">
         <Label
           htmlFor={id}
-          className={cn("dark:text-white", error && "text-red-500")}
+          className={cn("dark:text-white text-[#2E3192]", error && "text-red-500")}
         >
           {label}
           {required && <span className="text-destructive ml-2">*</span>}
