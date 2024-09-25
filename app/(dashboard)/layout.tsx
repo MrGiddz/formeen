@@ -11,31 +11,42 @@ import React from "react";
 type Props = {};
 
 export const metadata: Metadata = {
-  title: 'The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Magboro, Ogun State',
-  description: 'Join us at The Redeemed Christian Church of God, Ceaseless Joy Area HQ, where we build faith and community in Makogi, Ogun State.',
-  keywords: 'RCCG, Ceaseless Joy Area HQ, Makogi, Ogun State, Christian church, faith, community',
-  authors: [{ name: 'RCCG Ceaseless Joy Area HQ, Makogi, Magboro, Ogun State' }],
+  title:
+    "The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Magboro, Ogun State",
+  description:
+    "Join us at The Redeemed Christian Church of God, Ceaseless Joy Area HQ, where we build faith and community in Makogi, Ogun State.",
+  keywords:
+    "RCCG, Ceaseless Joy Area HQ, Makogi, Ogun State, Christian church, faith, community",
+  authors: [
+    { name: "RCCG Ceaseless Joy Area HQ, Makogi, Magboro, Ogun State" },
+  ],
   icons: {
-    icon: '/favicon.ico',
+    icon: "/favicon.ico",
   },
   openGraph: {
-    title: 'The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Ogun State',
-    description: 'Experience spiritual growth and community at RCCG Ceaseless Joy Area HQ in Makogi, Magboro, Ogun State',
-    url: 'https://rccgceaselessjoy.com', // Update with your actual URL
+    title:
+      "The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Ogun State",
+    description:
+      "Experience spiritual growth and community at RCCG Ceaseless Joy Area HQ in Makogi, Magboro, Ogun State",
+    url: "https://rccgceaselessjoy.com", // Update with your actual URL
     images: [
       {
-        url: 'https://example.com/image.jpg', // Update with your actual image URL
+        url: "https://res.cloudinary.com/dwks1ttmv/image/upload/v1727220520/yqjmygmdenx9f0fpamxw.png", // Update with your actual image URL
         width: 800,
         height: 600,
-        alt: 'A description of the image related to the church',
+        alt: "A description of the image related to the church",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Ogun State',
-    description: 'Join us at RCCG Ceaseless Joy Area HQ, a community of faith and worship in Makogi, Ogun State.',
-    // image: 'https://example.com/image.jpg', // Update with your actual image URL
+    card: "summary_large_image",
+    title:
+      "The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Ogun State",
+    description:
+      "Join us at RCCG Ceaseless Joy Area HQ, a community of faith and worship in Makogi, Ogun State.",
+    images: [
+      "https://res.cloudinary.com/dwks1ttmv/image/upload/v1727220520/yqjmygmdenx9f0fpamxw.png",
+    ],
   },
 };
 
