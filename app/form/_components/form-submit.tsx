@@ -342,7 +342,7 @@ const FormSubmit = ({
                     <div className="absolute w-full h-full bg-white rounded-t-[700px] rounded-b-[600px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[700px] before:rounded-b-[600px] "></div>
 
                     <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
-                      <div className="w-20 h-8 md:w-24 md:h-12 relative flex justify-center items-center">
+                      <div className="w-20 h-8 md:w-24 md:h-10 relative flex justify-center items-center">
                         <Image
                           src="/RCCGCJPOBS4.png"
                           alt="rccg-logo"
@@ -365,7 +365,7 @@ const FormSubmit = ({
                       <div className="grid grid-cols-9 z-20 pt-8">
                         <div className="col-span-3 flex flex-col justify-end">
                           <div className="w-48 h-48 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-30px] before:-z-[5] z-10">
-                            <div className="w-[185px] h-[185px] p-[4px] flex justify-center items-center rounded-full overflow-hidden">
+                            <div className="w-[185px] h-[185px] p-[2px] flex justify-center items-center rounded-full overflow-hidden">
                               <Image
                                 src={userImage || "/avatar.png"}
                                 alt="user-image"
