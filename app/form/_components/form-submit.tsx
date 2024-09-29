@@ -4,7 +4,6 @@ import {
   FormElementInstance,
   FormElements,
 } from "../../(dashboard)/forms/builder/_components/form-elements";
-import { HiCursorClick } from "react-icons/hi";
 import { useCallback, useRef, useState, useTransition } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { ImSpinner2 } from "react-icons/im";
@@ -12,10 +11,8 @@ import { SubmitForm } from "@/actions/form";
 import { sendmail, sendSMS } from "@/actions/send-notification";
 import Image from "next/image";
 import QRCode from "qrcode";
-
 import html2canvas from "html2canvas";
 import { cn } from "@/lib/utils";
-import { Inter } from "@/styles/fonts";
 import { Share2Icon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Confetti from "react-confetti";
@@ -313,7 +310,7 @@ const FormSubmit = ({
     }
   };
 
-  if (submitted) {
+  if (true) {
     return (
       <>
         <Confetti
@@ -342,10 +339,10 @@ const FormSubmit = ({
                   className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative overflow-hidden">
-                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] "></div>
+                    <div className="absolute w-full h-full bg-white rounded-t-[700px] rounded-b-[600px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[700px] before:rounded-b-[600px] "></div>
 
                     <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
-                      <div className="w-20 h-8 md:w-28 md:h-12 relative flex justify-center items-center">
+                      <div className="w-20 h-8 md:w-24 md:h-12 relative flex justify-center items-center">
                         <Image
                           src="/RCCGCJPOBS4.png"
                           alt="rccg-logo"
@@ -354,7 +351,6 @@ const FormSubmit = ({
                           className=""
                         />
                       </div>
-
                       <div className="z-20 pl-4 self-start">
                         <h1 className="text-[#2E3192] font-bold text-lg relative">
                           RCCG CEASELESS JOY AREA HQ
@@ -366,10 +362,10 @@ const FormSubmit = ({
                     </div>
 
                     <div className="z-10 flex justify-center items-center px-8">
-                      <div className="grid grid-cols-9 z-20 pt-12">
-                        <div className="col-span-3">
-                          <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[30px] before:border-r-[30px] before:border-t-[30px] before:border-transparent before:border-t-white before:bottom-[-24.5px] z-10">
-                            <div className="w-[150px] h-[150px] flex justify-center items-center rounded-full overflow-hidden">
+                      <div className="grid grid-cols-9 z-20 pt-16">
+                        <div className="col-span-3 flex flex-col justify-end">
+                          <div className="w-48 h-48 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-30px] before:-z-[5] z-10">
+                            <div className="w-[185px] h-[185px] p-[4px] flex justify-center items-center rounded-full overflow-hidden">
                               <Image
                                 src={userImage || "/avatar.png"}
                                 alt="user-image"
@@ -381,10 +377,9 @@ const FormSubmit = ({
                             </div>
                           </div>
                         </div>
-
                         <div className="col-span-6 relative">
                           <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-64 h-48 opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
-                            <div className="w-64 h-36 relative aspect-video">
+                            <div className="w-52 h-24 relative aspect-video">
                               <Image
                                 src="/RCCGCJPOBS4.png"
                                 alt="RCCGCJ"
@@ -409,7 +404,6 @@ const FormSubmit = ({
                                 Guest
                               </p>
                             </div>
-
                             <div className="self-end text-end leading-8 col-span-1">
                               <h1 className="text-base font-medium flex justify-end items-center">
                                 <span className="text-[#2E3192] font-semibold pr-1">
@@ -434,11 +428,10 @@ const FormSubmit = ({
                         </div>
                       </div>
                     </div>
-
                     <div className="relative flex justify-end items-center w-full px-1">
                       <div className="flex flex-col justify-center items-center self-end">
                         <div className="p-[2px] bg-white">
-                          <div className="w-16 h-16 relative">
+                          <div className="w-12 h-12 relative">
                             <Image
                               src="/code.png"
                               alt="Generated QR Code"
@@ -452,7 +445,6 @@ const FormSubmit = ({
                         </p>
                       </div>
                     </div>
-
                     <div className="text-center w-full self-end">
                       <p className="text-center text-xs text-white self-center">
                         <span>Register: </span>{" "}
@@ -495,7 +487,6 @@ const FormSubmit = ({
       >
         {content.map((element) => {
           const FormElement = FormElements[element.type].formComponent;
-
           return (
             <FormElement
               formDescription={
