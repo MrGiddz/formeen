@@ -368,7 +368,7 @@ const FormSubmit = ({
                       <div className="grid grid-cols-9 z-20 pt-12">
                         <div className="col-span-3">
                           <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[30px] before:border-r-[30px] before:border-t-[30px] before:border-transparent before:border-t-white before:bottom-[-24.5px] z-10">
-                            <div className="w-[150px] h-[150px] flex justify-center items-center rounded-full">
+                            <div className="w-[150px] h-[150px] flex justify-center items-center rounded-full overflow-hidden">
                               <Image
                                 src={userImage || "/avatar.png"}
                                 alt="user-image"
