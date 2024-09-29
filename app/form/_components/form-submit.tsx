@@ -476,7 +476,7 @@ const FormSubmit = ({
               <Button
                 variant="outline"
                 className="border col-span-1 w-full border-[#2E3192] text-[#2E3192] text-base font-normal"
-                onClick={() => router.back()}
+                onClick={() => setSubmitted(false)}
               >
                 Reregister
               </Button>
