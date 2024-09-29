@@ -229,8 +229,8 @@ const FormSubmit = ({
           useCORS: true,
           allowTaint: false,
           scrollY: -window.scrollY,
-          windowWidth: 1920,
-          windowHeight: 1080,
+          windowWidth: 2048,
+          windowHeight: 1280,
           foreignObjectRendering: false,
           onclone: (clonedDoc) => {
             // Wait for fonts to be ready inside the cloned document
