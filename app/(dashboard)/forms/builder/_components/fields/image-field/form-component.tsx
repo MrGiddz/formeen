@@ -150,8 +150,9 @@ function FormComponent({
                         <Image
                           src={"/Frame 3.png"}
                           alt="logo-image"
-                          className="object-cover rounded-md"
-                          fill
+                          className="object-contain rounded-md"
+                          width={50}
+                          height={50}
                           sizes="auto"
                         />
                       )}
