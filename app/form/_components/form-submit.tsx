@@ -229,8 +229,8 @@ const FormSubmit = ({
           useCORS: true,
           allowTaint: false,
           scrollY: -window.scrollY,
-          windowWidth: imageCapture.scrollWidth,
-          windowHeight: imageCapture.scrollHeight,
+          windowWidth: 1920,
+          windowHeight: 1080,
           foreignObjectRendering: false,
           onclone: (clonedDoc) => {
             // Wait for fonts to be ready inside the cloned document
@@ -423,7 +423,7 @@ const FormSubmit = ({
                                 </span>
                               </p>
                               <p className="text-sm font-normal flex justify-end items-center">
-                                <span className="pr-1">Phone Number:</span>
+                                <span className="pr-1">For more Info, call </span>
                                 <span>+2349033442244</span>
                               </p>
                             </div>
