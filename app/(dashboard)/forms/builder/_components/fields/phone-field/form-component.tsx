@@ -57,7 +57,7 @@ function FormComponent({
           const valid = PhoneFieldFormElement.validate(element, e.target.value);
           setError(!valid);
           if (!valid) return;
-          submitValue(element.id, e.target.value);
+          submitValue(element.id, "234" + e.target.value);
         }}
         value={value}
         type="tel"
