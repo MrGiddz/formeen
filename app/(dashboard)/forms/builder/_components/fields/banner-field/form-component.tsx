@@ -27,19 +27,19 @@ function FormComponent({
           sizes="auto"
         />
       </div>
-      <h1 className="text-2xl font-semibold text-[#2E3192] pt-1 px-4">
+      <h1 className="text-xl md:text-2xl font-semibold text-[#2E3192] pt-1 px-4">
         {title}
       </h1>
-      <h3 className="text-lg font-medium text-[#2E3192] py-1 px-4">
+      <h3 className="text-base md:text-lg font-medium text-[#2E3192] py-1 px-4">
         {subTitle}
       </h3>
       <div className="px-4">
         {descriptions?.map((description, index) => (
-          <div key={index} className="flex justify-start items-center">
+          <div key={index} className="flex justify-start items-start">
             <p className="text-sm font-semibold text-[#2E3192] leading-5">
-              {description.title}
+              {description.title}:
             </p>
-            <p className="text-xs px-1 font-light text-[#2E3192] leading-5">
+            <p className="text-xs md:text-sm px-1 font-light text-[#2E3192] leading-5">
               {description.value}
             </p>
           </div>

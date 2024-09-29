@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/toaster";
-import NextTopLoader from "nextjs-toploader"
+import NextTopLoader from "nextjs-toploader";
 import { cn } from "@/lib/utils";
 import { Inter } from "@/styles/fonts";
 
@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en" className={cn(Inter.className)} suppressHydrationWarning>
-        <body>
+        <body className="overflow-hidden">
           <NextTopLoader />
           <ThemeProvider
             attribute="class"

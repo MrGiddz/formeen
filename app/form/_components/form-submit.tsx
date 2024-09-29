@@ -313,7 +313,7 @@ const FormSubmit = ({
     }
   };
 
-  if (submitted) {
+  if (true) {
     return (
       <>
         <Confetti
@@ -327,7 +327,7 @@ const FormSubmit = ({
             "flex flex-col justify-center w-full h-full items-center p-4 font-['Inter',sans-serif]"
           )}
         >
-          <div className="max-w-3xl flex flex-col gap-4 flex-grow bg-background w-full p-8 overflow-y-auto md:border md:shadow-xl rounded">
+          <div className="max-w-3xl flex flex-col gap-4 flex-grow bg-background w-full p-8 md:border md:shadow-xl rounded">
             <div className="overflow-hidden">
               <h1 className="text-xl md:text-2xl font-bold z-50">
                 Form Submitted
@@ -336,13 +336,13 @@ const FormSubmit = ({
                 Thank you for submitting the form, you can close the form now
               </p>
 
-              <div className="w-full relative flex justify-center items-start overflow-hidden">
+              <div className="w-full relative flex justify-center items-start overflow-hidden max-h-[300px]  md:max-h-[460px]">
                 <div
                   ref={imageRef}
                   className="min-w-[600px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative">
-                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 ">
+                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0" style={{backgroundImage: "url('/bgpattern.jpg')"}}>
                       <div className="w-full h-full relative">
                         <div className="absolute"></div>
                       </div>
@@ -490,10 +490,10 @@ const FormSubmit = ({
   }
 
   return (
-    <div className="flex flex-col max-w-3xl justify-center w-full items-center p-8 mx-auto">
+    <div className="flex flex-col max-w-3xl justify-center w-full items-center px-2 py-6 mx-auto">
       <div
         key={renderKey}
-        className="gap-4 flex-grow bg-background w-full overflow-y-auto [box-shadow:0px_0px_2px_0px_#00000026] rounded-md"
+        className="gap-4 flex-grow bg-background w-full [box-shadow:0px_0px_2px_0px_#00000026] rounded-md"
       >
         {content.map((element) => {
           const FormElement = FormElements[element.type].formComponent;
