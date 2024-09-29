@@ -248,10 +248,10 @@ const FormSubmit = ({
             const dataUrl = canvas.toDataURL();
 
             // Download the image
-            // const link = document.createElement("a");
-            // link.download = `${userName} | Super Sunday Africana 2.1.png`;
-            // link.href = dataUrl;
-            // link.click();
+            const link = document.createElement("a");
+            link.download = `${userName} | Super Sunday Africana 2.1.png`;
+            link.href = dataUrl;
+            link.click();
 
             // Check if the Web Share API is supported
             if (navigator.share) {
@@ -312,7 +312,7 @@ const FormSubmit = ({
     }
   };
 
-  if (true) {
+  if (submitted) {
     return (
       <>
         <Confetti
