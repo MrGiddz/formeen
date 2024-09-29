@@ -127,8 +127,6 @@ const FormSubmit = ({
       AddQueryParam("submitted", "true");
       const formElements = content as FormElementInstance[];
 
-      console.log({ formElements });
-
       formElements.forEach((elem) => {
         switch (elem.type) {
           case "EmailField":
@@ -227,10 +225,6 @@ const FormSubmit = ({
     // Ensure fonts are loaded before starting canvas rendering
     document.fonts.ready
       .then(() => {
-        console.log({
-          windowWidth: imageCapture.scrollWidth,
-          windowHeight: imageCapture.scrollHeight,
-        });
         html2canvas(imageCapture, {
           useCORS: true,
           allowTaint: false,

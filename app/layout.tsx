@@ -24,7 +24,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en" className={cn(Inter.className)} suppressHydrationWarning>
-        <body className="overflow-hidden">
+        <body>
           <NextTopLoader />
           <ThemeProvider
             attribute="class"
