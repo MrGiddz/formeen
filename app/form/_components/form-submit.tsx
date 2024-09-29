@@ -362,7 +362,7 @@ const FormSubmit = ({
                     </div>
 
                     <div className="z-10 flex justify-center items-center px-8">
-                      <div className="grid grid-cols-9 z-20 pt-16">
+                      <div className="grid grid-cols-9 z-20 pt-12">
                         <div className="col-span-3 flex flex-col justify-end">
                           <div className="w-48 h-48 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-30px] before:-z-[5] z-10">
                             <div className="w-[185px] h-[185px] p-[4px] flex justify-center items-center rounded-full overflow-hidden">
@@ -372,7 +372,7 @@ const FormSubmit = ({
                                 width={400}
                                 height={400}
                                 sizes="auto"
-                                className="rounded-full object-cover object-center"
+                                className="rounded-full object-cover"
                               />
                             </div>
                           </div>
