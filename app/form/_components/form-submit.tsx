@@ -312,7 +312,7 @@ const FormSubmit = ({
     }
   };
 
-  if (submitted) {
+  if (true) {
     return (
       <>
         <Confetti
@@ -382,8 +382,8 @@ const FormSubmit = ({
                         </div>
 
                         <div className="col-span-6 relative">
-                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-96 h-80 opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
-                            <div className="w-full h-full relative">
+                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-64 h-48 opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
+                            <div className="w-64 h-48  relative">
                               <Image
                                 src="/RCCGCJPOBS4.png"
                                 alt="RCCGCJ"
