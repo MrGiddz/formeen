@@ -312,7 +312,7 @@ const FormSubmit = ({
     }
   };
 
-  if (submitted) {
+  if (true) {
     return (
       <>
         <Confetti
@@ -341,9 +341,7 @@ const FormSubmit = ({
                   className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative">
-                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] ">
-                      <div className="w-full h-full relative"></div>
-                    </div>
+                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] "></div>
 
                     <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
                       <div className="w-20 h-8 md:w-28 md:h-12 relative flex justify-center items-center">
@@ -384,14 +382,16 @@ const FormSubmit = ({
                         </div>
 
                         <div className="col-span-6 relative">
-                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-96 h-80 opacity-10 bg-white flex justify-center items-center rounded-full object-contain -z-1">
-                            <Image
-                              src="/RCCGCJPOBS4.png"
-                              alt="user-image"
-                              fill
-                              sizes="auto"
-                              className="object-contain"
-                            />
+                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-96 h-80 opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
+                            <div className="w-full h-full relative">
+                              <Image
+                                src="/RCCGCJPOBS4.png"
+                                alt="RCCGCJ"
+                                fill
+                                sizes="auto"
+                                className="object-contain"
+                              />
+                            </div>
                           </div>
                           <p className="text-center text-base font-normal relative z-30">
                             I Will Be
