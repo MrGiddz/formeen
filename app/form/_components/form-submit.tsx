@@ -402,7 +402,7 @@ const FormSubmit = ({
                           <div className="pl-5 py-4 flex flex-col justify-start items-start">
                             <div className="self-start text-end leading-8 col-span-1">
                               <h1 className="text-base font-semibold text-[#2E3192]">
-                                Olaniyi Gideon Olamide
+                               {userName}
                               </h1>
                               <p className="text-sm font-normal text-start">
                                 Guest
