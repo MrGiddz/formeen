@@ -140,13 +140,17 @@ const FormSubmit = ({
                 formName,
                 (recipient, updatedMessage, formName) => {
                   if (formName) {
-                    sendmail({
-                      to: recipient,
-                      fromName: formName,
-                      subject: "Registration Successful",
-                      text: updatedMessage,
-                      html: `<p>${updatedMessage}</p>`,
-                    });
+                    try {
+                      sendmail({
+                        to: recipient,
+                        fromName: formName,
+                        subject: "Registration Successful",
+                        text: updatedMessage,
+                        html: `<p>${updatedMessage}</p>`,
+                      });
+                    } catch (error) {
+                      console.log("error sending mail", error);
+                    }
                   }
                 }
               );
@@ -163,8 +167,11 @@ const FormSubmit = ({
                 formValues.current,
                 formName,
                 (recipient, updatedMessage) => {
-                  console.log({ recipient, updatedMessage });
-                  sendSMS(updatedMessage, recipient);
+                  try {
+                    sendSMS(updatedMessage, recipient);
+                  } catch (error) {
+                    console.log("error sending sms", error);
+                  }
                 }
               );
             } catch (error) {
@@ -176,7 +183,6 @@ const FormSubmit = ({
             const elementName = elem.extraAttributes.name;
 
             if (elementName === "fullname") {
-              console.log({ elementName });
               const name = formValues.current[elem.id];
               setuserName(name);
             }
@@ -185,7 +191,6 @@ const FormSubmit = ({
 
           case "ImageField":
             const image = formValues.current[elem.id];
-            console.log(image);
             setuserImage(image);
             break;
         }
@@ -313,7 +318,7 @@ const FormSubmit = ({
     }
   };
 
-  if (true) {
+  if (submitted) {
     return (
       <>
         <Confetti
@@ -342,7 +347,7 @@ const FormSubmit = ({
                   className="min-w-[600px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative">
-                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0" style={{backgroundImage: "url('/bgpattern.jpg')"}}>
+                    <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] ">
                       <div className="w-full h-full relative">
                         <div className="absolute"></div>
                       </div>
@@ -384,10 +389,7 @@ const FormSubmit = ({
                           <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[30px] before:border-r-[30px] before:border-t-[30px] before:border-transparent before:border-t-white before:bottom-[-24.5px]">
                             <div className="w-[150px] h-[150px] flex justify-center items-center rounded-full">
                               <Image
-                                src={
-                                  userImage ||
-                                  "/0e613a909f2153262183be70fb312cc1.png"
-                                }
+                                src={userImage || "/avatar.png"}
                                 alt="user-image"
                                 width={400}
                                 height={400}
@@ -402,15 +404,15 @@ const FormSubmit = ({
                           <p className="text-center text-base font-normal relative z-30">
                             I Will Be
                           </p>
-                          <h1 className="relative z-30 text-xl text-center leading-7 font-semibold text-[#2E3192]">
+                          <h1 className="relative z-30 text-2xl text-center leading-7 font-semibold text-[#2E3192]">
                             Attending Super <br /> Sunday Africana 2.1
                           </h1>
                           <div className="pl-5 py-4 flex flex-col justify-start items-start">
                             <div className="self-start text-end leading-8 col-span-1">
-                              <h1 className="text-sm font-semibold text-[#2E3192]">
+                              <h1 className="text-base font-semibold text-[#2E3192]">
                                 Olaniyi Gideon Olamide
                               </h1>
-                              <p className="text-sm font-light text-start">
+                              <p className="text-sm font-normal text-start">
                                 Guest
                               </p>
                             </div>
@@ -443,7 +445,7 @@ const FormSubmit = ({
                         <div className="p-[2px] bg-white">
                           <div className="w-16 h-16 relative">
                             <Image
-                              src="/qrcode.png"
+                              src="/code.png"
                               alt="Generated QR Code"
                               fill
                               sizes="auto"
