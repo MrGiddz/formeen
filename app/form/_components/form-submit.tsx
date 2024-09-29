@@ -310,7 +310,7 @@ const FormSubmit = ({
     }
   };
 
-  if (true) {
+  if (submitted) {
     return (
       <>
         <Confetti
@@ -372,14 +372,14 @@ const FormSubmit = ({
                                 width={400}
                                 height={400}
                                 sizes="auto"
-                                className="rounded-full object-cover center"
+                                className="rounded-full object-cover object-center"
                               />
                             </div>
                           </div>
                         </div>
                         <div className="col-span-6 relative">
                           <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-64 h-48 opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
-                            <div className="w-52 h-24 relative aspect-video">
+                            <div className="w-64 h-24 relative aspect-video flex justify-center items-center">
                               <Image
                                 src="/RCCGCJPOBS4.png"
                                 alt="RCCGCJ"
