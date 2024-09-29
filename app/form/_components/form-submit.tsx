@@ -338,22 +338,21 @@ const FormSubmit = ({
               <div className="w-full relative flex justify-center items-start overflow-hidden max-h-[300px]  md:max-h-[460px]">
                 <div
                   ref={imageRef}
-                  className="min-w-[600px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
+                  className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative">
                     <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] ">
                       <div className="w-full h-full relative">
-                        <div className="absolute"></div>
+                        <div className="absolute left-1/2 -translate-x-[55%] translate-y-[25%] w-96 h-80 opacity-10 bg-white flex justify-center items-center rounded-full object-contain -z-1">
+                          <Image
+                            src="/RCCGCJPOBS2.png"
+                            alt="user-image"
+                            fill
+                            sizes="auto"
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-[55%] translate-y-[25%] w-64 h-56 opacity-10 bg-white flex justify-center items-center rounded-full object-contain -z-0">
-                      <Image
-                        src="/RCCGCJPOBS2.png"
-                        alt="user-image"
-                        fill
-                        sizes="auto"
-                        className="object-contain"
-                      />
                     </div>
 
                     <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
@@ -388,7 +387,7 @@ const FormSubmit = ({
                                 width={400}
                                 height={400}
                                 sizes="auto"
-                                className="rounded-full object-center object-scale-down center"
+                                className="rounded-full object-cover center"
                               />
                             </div>
                           </div>

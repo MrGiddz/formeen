@@ -128,7 +128,7 @@ function FormComponent({
                   {({ open }) => (
                     <div
                       className={cn(
-                        "relative w-44 h-28 mt-2 flex justify-center cursor-pointer items-center rounded-md",
+                        "relative w-44 h-28 mt-2 flex justify-center cursor-pointer items-center rounded-md border",
                         field.value === "" &&
                           "bg-[linear-gradient(180.43deg,#D9D9D9_5.34%,#B6B6B6_30.64%,#A6A6A6_58.44%,#737373_87.71%)]"
                       )}
@@ -138,9 +138,8 @@ function FormComponent({
                         <Image
                           src={field.value || ""}
                           alt="logo-image"
-                          className="object-contain rounded-md"
-                          width={500}
-                          height={200}
+                          className="object-cover rounded-md"
+                          fill
                           sizes="auto"
                         />
                       ) : uploading ? (
@@ -151,9 +150,8 @@ function FormComponent({
                         <Image
                           src={"/Frame 3.png"}
                           alt="logo-image"
-                          className="object-contain rounded-md"
-                          width={50}
-                          height={50}
+                          className="object-cover rounded-md"
+                          fill
                           sizes="auto"
                         />
                       )}
