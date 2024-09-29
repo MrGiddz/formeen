@@ -342,17 +342,7 @@ const FormSubmit = ({
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative">
                     <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] ">
-                      <div className="w-full h-full relative">
-                        <div className="absolute left-1/2 -translate-x-[55%] translate-y-[25%] w-96 h-80 opacity-10 bg-white flex justify-center items-center rounded-full object-contain -z-1">
-                          <Image
-                            src="/RCCGCJPOBS2.png"
-                            alt="user-image"
-                            fill
-                            sizes="auto"
-                            className="object-contain"
-                          />
-                        </div>
-                      </div>
+                      <div className="w-full h-full relative"></div>
                     </div>
 
                     <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
@@ -379,7 +369,7 @@ const FormSubmit = ({
                     <div className="z-10 flex justify-center items-center px-8">
                       <div className="grid grid-cols-9 z-20 pt-12">
                         <div className="col-span-3">
-                          <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[30px] before:border-r-[30px] before:border-t-[30px] before:border-transparent before:border-t-white before:bottom-[-24.5px]">
+                          <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[30px] before:border-r-[30px] before:border-t-[30px] before:border-transparent before:border-t-white before:bottom-[-24.5px] z-10">
                             <div className="w-[150px] h-[150px] flex justify-center items-center rounded-full">
                               <Image
                                 src={userImage || "/avatar.png"}
@@ -394,6 +384,15 @@ const FormSubmit = ({
                         </div>
 
                         <div className="col-span-6 relative">
+                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-96 h-80 opacity-10 bg-white flex justify-center items-center rounded-full object-contain -z-1">
+                            <Image
+                              src="/RCCGCJPOBS4.png"
+                              alt="user-image"
+                              fill
+                              sizes="auto"
+                              className="object-contain"
+                            />
+                          </div>
                           <p className="text-center text-base font-normal relative z-30">
                             I Will Be
                           </p>
