@@ -344,7 +344,7 @@ const FormSubmit = ({
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative overflow-hidden">
                     <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] "></div>
 
-                    <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10 overflow-hidden ">
+                    <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
                       <div className="w-20 h-8 md:w-28 md:h-12 relative flex justify-center items-center">
                         <Image
                           src="/RCCGCJPOBS4.png"
