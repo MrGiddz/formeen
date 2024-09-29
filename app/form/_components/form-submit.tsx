@@ -312,7 +312,7 @@ const FormSubmit = ({
     }
   };
 
-  if (true) {
+  if (submitted) {
     return (
       <>
         <Confetti
