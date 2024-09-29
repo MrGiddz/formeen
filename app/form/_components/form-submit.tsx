@@ -356,7 +356,7 @@ const FormSubmit = ({
                     </div>
 
                     <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
-                      <div className="w-28 h-12 relative flex justify-center items-center">
+                      <div className="w-20 h-8 md:w-28 md:h-12 relative flex justify-center items-center">
                         <Image
                           src="/RCCGCJPOBS4.png"
                           alt="rccg-logo"
