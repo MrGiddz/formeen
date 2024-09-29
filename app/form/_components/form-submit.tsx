@@ -19,6 +19,7 @@ import { Inter } from "@/styles/fonts";
 import { Share2Icon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Confetti from "react-confetti";
+import { useModal } from "@/hooks/use-modal";
 
 interface FormSubmitProps {
   formUrl: string;
@@ -44,7 +45,7 @@ const FormSubmit = ({
   const pathname = usePathname();
   const [userImage, setuserImage] = useState("");
   const [userName, setuserName] = useState("");
-
+  const { onOpen } = useModal();
   const [qrCodeUrl, setQrCodeUrl] = useState("");
 
   const submitValue = (key: string, value: string) => {
@@ -340,10 +341,10 @@ const FormSubmit = ({
                   ref={imageRef}
                   className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
-                  <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative">
+                  <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative overflow-hidden">
                     <div className="absolute w-full h-full bg-white rounded-t-[585px] rounded-b-[345px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[585px] before:rounded-b-[345px] "></div>
 
-                    <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
+                    <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10 overflow-hidden ">
                       <div className="w-20 h-8 md:w-28 md:h-12 relative flex justify-center items-center">
                         <Image
                           src="/RCCGCJPOBS4.png"
@@ -402,7 +403,7 @@ const FormSubmit = ({
                           <div className="pl-5 py-4 flex flex-col justify-start items-start">
                             <div className="self-start text-end leading-8 col-span-1">
                               <h1 className="text-base font-semibold text-[#2E3192]">
-                               {userName}
+                                {userName}
                               </h1>
                               <p className="text-sm font-normal text-start">
                                 Guest
@@ -423,7 +424,9 @@ const FormSubmit = ({
                                 </span>
                               </p>
                               <p className="text-sm font-normal flex justify-end items-center">
-                                <span className="pr-1">For more Info, call </span>
+                                <span className="pr-1">
+                                  For more Info, call{" "}
+                                </span>
                                 <span>+2349033442244</span>
                               </p>
                             </div>
@@ -473,6 +476,7 @@ const FormSubmit = ({
               <Button
                 variant="outline"
                 className="border col-span-1 w-full border-[#2E3192] text-[#2E3192] text-base font-normal"
+                onClick={() => router.back()}
               >
                 Reregister
               </Button>
@@ -509,9 +513,13 @@ const FormSubmit = ({
       <div className="flex w-full justify-between gap-4 items-center">
         <Button
           className="mt-8 w-full bg-[#2E3192] font-sm font-light hover:bg-white hover:text-[#2E3192]"
-          onClick={() => {
-            startTransition(submitForm);
-          }}
+          onClick={() =>
+            onOpen("verifyDetails", {
+              action() {
+                startTransition(submitForm);
+              },
+            })
+          }
           disabled={loading}
         >
           {!loading && "Submit"}

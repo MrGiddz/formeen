@@ -62,7 +62,6 @@ export default async function Layout({
   return (
     <main className="mx-5 sm:ml-[270px] h-full">
       <Sidebar />
-      <ModalProvider />
       <AlertProvider />
       {children}
     </main>

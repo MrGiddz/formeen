@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { cn } from "@/lib/utils";
 import { Inter } from "@/styles/fonts";
+import { ModalProvider } from "@/providers/modal-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,6 +35,7 @@ export default async function RootLayout({
           >
             {children}
             <Toaster />
+            <ModalProvider />
           </ThemeProvider>
         </body>
       </html>

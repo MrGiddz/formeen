@@ -2,6 +2,7 @@
 
 import CreateFormModal from "@/components/modals/create-form-modal";
 import PreviewFormModal from "@/components/modals/preview-form-modal";
+import VerifyDetailsModal from "@/components/modals/verify-details-modal";
 import { useEffect, useState } from "react";
 
 export const ModalProvider = () => {
@@ -19,6 +20,7 @@ export const ModalProvider = () => {
     <>
       <CreateFormModal />
       <PreviewFormModal />
+      <VerifyDetailsModal />
     </>
   );
 };

@@ -28,6 +28,50 @@ function FormComponent({
     setError(isInvalid === true);
   }, [isInvalid]);
 
+  const formatPhoneNumber = (phone: string) => {
+    // Remove all non-numeric characters except +
+    let formattedPhone = phone.replace(/[^\d+]/g, "");
+
+    // Handle number formats based on conditions
+    if (formattedPhone.startsWith("+234")) {
+      formattedPhone = formattedPhone.slice(1); // Remove the "+"
+    } else if (formattedPhone.startsWith("0")) {
+      formattedPhone = "234" + formattedPhone.slice(1); // Replace leading "0" with "234"
+    } else if (!formattedPhone.startsWith("234")) {
+      formattedPhone = "234" + formattedPhone; // Prepend "234" if not already present
+    }
+
+    return formattedPhone;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setValue(inputValue);
+
+    if (!submitValue) return;
+
+    // Validate and submit the raw value
+    const valid = PhoneFieldFormElement.validate(element, inputValue);
+    setError(!valid);
+    if (!valid) return;
+
+    submitValue(element.id, inputValue);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const formattedPhone = formatPhoneNumber(e.target.value);
+    setValue(formattedPhone);
+
+    if (!submitValue) return;
+
+    // Validate and submit the formatted value
+    const valid = PhoneFieldFormElement.validate(element, formattedPhone);
+    setError(!valid);
+    if (!valid) return;
+
+    submitValue(element.id, formattedPhone);
+  };
+
   return (
     <div className="flex flex-col gap-4 w-full px-6 py-4 mb-2 rounded-md">
       <Label
@@ -44,21 +88,8 @@ function FormComponent({
           "ring-foreground text-foreground border-foreground/40 placeholder:text-gray-300",
           error && "text-rose-500 ring-rose-500 border-rose-500"
         )}
-        onChange={(e) => {
-          setValue(e.target.value);
-          if (!submitValue) return;
-          const valid = PhoneFieldFormElement.validate(element, e.target.value);
-          setError(!valid);
-          if (!valid) return;
-          submitValue(element.id, e.target.value);
-        }}
-        onBlur={(e) => {
-          if (!submitValue) return;
-          const valid = PhoneFieldFormElement.validate(element, e.target.value);
-          setError(!valid);
-          if (!valid) return;
-          submitValue(element.id, "234" + e.target.value);
-        }}
+        onChange={handleChange}
+        onBlur={handleBlur}
         value={value}
         type="tel"
         min={min}
