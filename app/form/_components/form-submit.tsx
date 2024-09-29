@@ -362,7 +362,7 @@ const FormSubmit = ({
                     </div>
 
                     <div className="z-10 flex justify-center items-center px-8">
-                      <div className="grid grid-cols-9 z-20 pt-12">
+                      <div className="grid grid-cols-9 z-20 pt-8">
                         <div className="col-span-3 flex flex-col justify-end">
                           <div className="w-48 h-48 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-30px] before:-z-[5] z-10">
                             <div className="w-[185px] h-[185px] p-[4px] flex justify-center items-center rounded-full overflow-hidden">
@@ -378,8 +378,8 @@ const FormSubmit = ({
                           </div>
                         </div>
                         <div className="col-span-6 relative">
-                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-[25%] w-64 h-48 opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
-                            <div className="w-64 h-24 relative aspect-video flex justify-center items-center">
+                          <div className="absolute left-1/2 -translate-x-[55%] -translate-y-0 w-[28rem] h-[10rem] opacity-10 flex justify-center items-center rounded-full object-contain -z-1">
+                            <div className="w-[32rem] h-[11rem] relative aspect-video flex justify-center items-center">
                               <Image
                                 src="/RCCGCJPOBS4.png"
                                 alt="RCCGCJ"
@@ -397,10 +397,10 @@ const FormSubmit = ({
                           </h1>
                           <div className="pl-5 py-4 flex flex-col justify-start items-start">
                             <div className="self-start text-end leading-8 col-span-1">
-                              <h1 className="text-base font-semibold text-[#2E3192]">
+                              <h1 className="text-lg font-semibold text-[#2E3192]">
                                 {userName}
                               </h1>
-                              <p className="text-sm font-normal text-start">
+                              <p className="text-base font-normal text-start">
                                 Guest
                               </p>
                             </div>
