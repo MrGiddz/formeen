@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { FaSpinner } from "react-icons/fa";
 import { cn } from "@/lib/utils";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 
 const FormPropertiesSchema = z.object({
   image: z.string().url(),
@@ -104,44 +105,66 @@ function FormComponent({
                   className="block relative w-fit text-[#2E3192]"
                 >
                   {text}
-
-                  <div
-                    className={cn(
-                      "relative w-44 h-28 mt-2 flex justify-center cursor-pointer items-center rounded-md",
-                      field.value === "" &&
-                        "bg-[linear-gradient(180.43deg,#D9D9D9_5.34%,#B6B6B6_30.64%,#A6A6A6_58.44%,#737373_87.71%)]"
-                    )}
-                  >
-                    {field.value ? (
-                      <img
-                        src={field.value || ""}
-                        alt="logo-image"
-                        className="object-contain rounded-md"
-                        width={500}
-                        height={200}
-                        sizes="auto"
-                      />
-                    ) : uploading ? (
-                      <div className="w-full h-full flex justify-center items-center">
-                        <FaSpinner className="animate-spin" />
-                      </div>
-                    ) : (
-                      <Image
-                        src={"/Frame 3.png"}
-                        alt="logo-image"
-                        className="object-contain rounded-md"
-                        width={50}
-                        height={50}
-                        sizes="auto"
-                      />
-                    )}
-                    <div className="absolute right-2 bottom-2">
-                      <Paperclip className="text-[#A0A0A0]" />
-                    </div>
-                  </div>
                 </FormLabel>
 
-                <Input
+                <CldUploadWidget
+                  uploadPreset="cnibnvyq"
+                  onSuccess={(result) => {
+                    if (result.info) {
+                      type CustomCloudinaryUploadWidgetInfo =
+                        CloudinaryUploadWidgetInfo & {
+                          secure_url: string;
+                        };
+                      const info =
+                        result.info as CustomCloudinaryUploadWidgetInfo;
+                      const secureUrl = info.secure_url;
+                      form.setValue("image", secureUrl, {
+                        shouldValidate: true,
+                      });
+                      if (submitValue) submitValue(element.id, secureUrl);
+                    }
+                  }}
+                >
+                  {({ open }) => (
+                    <div
+                      className={cn(
+                        "relative w-44 h-28 mt-2 flex justify-center cursor-pointer items-center rounded-md",
+                        field.value === "" &&
+                          "bg-[linear-gradient(180.43deg,#D9D9D9_5.34%,#B6B6B6_30.64%,#A6A6A6_58.44%,#737373_87.71%)]"
+                      )}
+                      onClick={() => open()}
+                    >
+                      {field.value ? (
+                        <Image
+                          src={field.value || ""}
+                          alt="logo-image"
+                          className="object-contain rounded-md"
+                          width={500}
+                          height={200}
+                          sizes="auto"
+                        />
+                      ) : uploading ? (
+                        <div className="w-full h-full flex justify-center items-center">
+                          <FaSpinner className="animate-spin" />
+                        </div>
+                      ) : (
+                        <Image
+                          src={"/Frame 3.png"}
+                          alt="logo-image"
+                          className="object-contain rounded-md"
+                          width={50}
+                          height={50}
+                          sizes="auto"
+                        />
+                      )}
+                      <div className="absolute right-2 bottom-2">
+                        <Paperclip className="text-[#A0A0A0]" />
+                      </div>
+                    </div>
+                  )}
+                </CldUploadWidget>
+
+                {/* <Input
                   type="file"
                   className="hidden"
                   id="image-input"
@@ -153,7 +176,7 @@ function FormComponent({
                       console.log({ selectedFile });
                     }
                   }}
-                />
+                /> */}
                 <FormMessage />
               </FormItem>
             )}

@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: Props) {
   return (
-    <div className="flex flex-col h-full min-h-screen min-w-full bg-background max-h-screen">
+    <div className="flex flex-col justify-center items-center bg-background">
       <main className="flex w-full flex-col flex-grow">{children}</main>
     </div>
   );
