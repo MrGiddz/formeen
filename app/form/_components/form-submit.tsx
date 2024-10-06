@@ -13,7 +13,7 @@ import Image from "next/image";
 import QRCode from "qrcode";
 import html2canvas from "html2canvas";
 import { cn } from "@/lib/utils";
-import { Share2Icon } from "lucide-react";
+import { ArrowDown, Share2Icon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Confetti from "react-confetti";
 import { useModal } from "@/hooks/use-modal";
@@ -42,6 +42,7 @@ const FormSubmit = ({
   const pathname = usePathname();
   const [userImage, setuserImage] = useState("");
   const [userName, setuserName] = useState("");
+  const [userStatus, setuserStatus] = useState("");
   const { onOpen } = useModal();
   const [qrCodeUrl, setQrCodeUrl] = useState("");
 
@@ -189,6 +190,11 @@ const FormSubmit = ({
             const image = formValues.current[elem.id];
             setuserImage(image);
             break;
+
+          case "RadioField":
+            const fieldValue = formValues.current[elem.id];
+            setuserStatus(fieldValue);
+            break;
         }
       });
     } catch (error) {
@@ -228,7 +234,7 @@ const FormSubmit = ({
           allowTaint: false,
           scrollY: -window.scrollY,
           windowWidth: 2048,
-          windowHeight: 1280,
+          windowHeight: 1152,
           foreignObjectRendering: false,
           onclone: (clonedDoc) => {
             // Wait for fonts to be ready inside the cloned document
@@ -250,6 +256,48 @@ const FormSubmit = ({
             link.download = `${userName} | Super Sunday Africana 2.1.png`;
             link.href = dataUrl;
             link.click();
+          })
+          .catch((error) => {
+            console.error("Error generating canvas", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Font loading failed", error);
+      });
+  };
+
+  const handleShare = () => {
+    const imageCapture = imageRef.current;
+
+    if (!imageCapture) {
+      console.error("Image reference is null or undefined.");
+      return;
+    }
+
+    // Ensure fonts are loaded before starting canvas rendering
+    document.fonts.ready
+      .then(() => {
+        html2canvas(imageCapture, {
+          useCORS: true,
+          allowTaint: false,
+          scrollY: -window.scrollY,
+          windowWidth: 2048,
+          windowHeight: 1152,
+          foreignObjectRendering: false,
+          onclone: (clonedDoc) => {
+            // Wait for fonts to be ready inside the cloned document
+            clonedDoc.fonts.ready
+              .then(() => {
+                console.log("Fonts are ready inside onclone");
+              })
+              .catch((error) => {
+                console.error("Error waiting for fonts inside onclone", error);
+              });
+          },
+        })
+          .then((canvas) => {
+            // Convert the canvas to a data URL (base64 encoded PNG)
+            const dataUrl = canvas.toDataURL();
 
             // Check if the Web Share API is supported
             if (navigator.share) {
@@ -293,29 +341,12 @@ const FormSubmit = ({
       });
   };
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Super Sunday Africana",
-          text: "Check out this QR Code!",
-          url: qrCodeUrl,
-        });
-        console.log("Successfully shared!");
-      } catch (error) {
-        console.error("Error sharing:", error);
-      }
-    } else {
-      alert("Sharing is not supported on this browser.");
-    }
-  };
-
-  if (submitted) {
+  if (true) {
     return (
       <>
         <Confetti
           recycle={false}
-          numberOfPieces={3000}
+          numberOfPieces={500}
           width={window.innerWidth}
           height={window.innerHeight}
         />
@@ -336,23 +367,24 @@ const FormSubmit = ({
               <div className="w-full relative flex justify-center items-start overflow-hidden max-h-[300px]  md:max-h-[460px]">
                 <div
                   ref={imageRef}
-                  className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
+                  className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-80 lg:scale-100 border-gray-100 overflow-hidden flex flex-col justify-start items-start"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative overflow-hidden">
                     <div className="absolute w-full h-full bg-white rounded-t-[700px] rounded-b-[600px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[700px] before:rounded-b-[600px] "></div>
 
-                    <div className="relative px-4 py-2 flex justify-start items-center gap-x-9 z-10">
-                      <div className="w-20 h-8 md:w-24 md:h-10 relative flex justify-center items-center">
+                    <div className="relative px-4 pt-2 flex justify-start items-center gap-x-9 z-10">
+                      <div className="w-20 h-8 md:w-24 md:h-10 relative flex justify-center items-center object-contain">
                         <Image
                           src="/RCCGCJPOBS4.png"
                           alt="rccg-logo"
-                          fill
+                          width={90}
+                          height={40}
                           sizes="auto"
-                          className=""
+                          className="object-contain"
                         />
                       </div>
-                      <div className="z-20 pl-4 self-start">
-                        <h1 className="text-[#2E3192] font-bold text-lg relative">
+                      <div className="z-20 self-start flex flex-col justify-start items-start">
+                        <h1 className="text-[#2E3192] font-bold text-lg relative m-0 p-0">
                           RCCG CEASELESS JOY AREA HQ
                         </h1>
                         <h4 className="text-base font-normal relative">
@@ -362,10 +394,10 @@ const FormSubmit = ({
                     </div>
 
                     <div className="z-10 flex justify-center items-center px-8">
-                      <div className="grid grid-cols-9 z-20 pt-8">
-                        <div className="col-span-3 flex flex-col justify-end">
-                          <div className="w-48 h-48 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-30px] before:-z-[5] z-10">
-                            <div className="w-[185px] h-[185px] p-[2px] flex justify-center items-center rounded-full overflow-hidden">
+                      <div className="grid grid-cols-9 z-20 pt-2">
+                        <div className="col-span-3 flex flex-col justify-end relative">
+                          <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-28px] before:-z-[5] z-10">
+                            <div className="w-[155px] h-[155px] p-[2px] flex justify-center items-center rounded-full overflow-hidden">
                               <Image
                                 src={userImage || "/avatar.png"}
                                 alt="user-image"
@@ -383,29 +415,30 @@ const FormSubmit = ({
                               <Image
                                 src="/RCCGCJPOBS4.png"
                                 alt="RCCGCJ"
-                                fill
+                                width={400}
+                                height={225}
                                 sizes="auto"
                                 className="object-contain"
                               />
                             </div>
                           </div>
-                          <p className="text-center text-base font-normal relative z-30">
+                          <p className="text-center text-sm font-normal relative z-30">
                             I Will Be
                           </p>
-                          <h1 className="relative z-30 text-2xl text-center leading-7 font-semibold text-[#2E3192]">
+                          <h1 className="relative z-30 text-xl text-center leading-7 font-semibold text-[#2E3192]">
                             Attending Super <br /> Sunday Africana 2.1
                           </h1>
-                          <div className="pl-5 py-4 flex flex-col justify-start items-start">
+                          <div className="pl-5 pt-4 flex flex-col justify-start items-start">
                             <div className="self-start text-end leading-8 col-span-1">
                               <h1 className="text-lg font-semibold text-[#2E3192]">
                                 {userName}
                               </h1>
-                              <p className="text-base font-normal text-start">
-                                Guest
+                              <p className="text-sm font-normal text-start">
+                                {userStatus || "Guest"}
                               </p>
                             </div>
-                            <div className="self-end text-end leading-8 col-span-1">
-                              <h1 className="text-base font-medium flex justify-end items-center">
+                            <div className="self-end text-end leading-8 px-[2px] py-3 col-span-1">
+                              <h1 className="text-sm font-medium flex justify-end items-center">
                                 <span className="text-[#2E3192] font-semibold pr-1">
                                   Tagged:
                                 </span>
@@ -428,14 +461,15 @@ const FormSubmit = ({
                         </div>
                       </div>
                     </div>
-                    <div className="relative flex justify-end items-center w-full px-1">
+                    <div className="relative flex justify-end items-center w-full px-1 mt-2">
                       <div className="flex flex-col justify-center items-center self-end">
-                        <div className="p-[2px] bg-white">
-                          <div className="w-12 h-12 relative">
+                        <div className="bg-white">
+                          <div className="w-24 h-24 relative">
                             <Image
                               src="/code.png"
                               alt="Generated QR Code"
-                              fill
+                              width={98}
+                              height={98}
                               sizes="auto"
                             />
                           </div>
@@ -457,10 +491,17 @@ const FormSubmit = ({
                 </div>
               </div>
             </div>
-            <div className="grid md:grid-cols-2 gap-3 w-full">
+            <div className="grid md:grid-cols-3 gap-3 w-full">
               <Button
                 className="bg-[#2E3192] col-span-1 hover:text-white group text-base font-normal w-full"
                 onClick={handleDownload}
+              >
+                Download{" "}
+                <ArrowDown className="w-4 h-4 pl-1 group-hover:text-white" />
+              </Button>
+              <Button
+                className="bg-[#2E3192] col-span-1 hover:text-white group text-base font-normal w-full"
+                onClick={handleShare}
               >
                 Share{" "}
                 <Share2Icon className="w-4 h-4 pl-1 group-hover:text-white" />
