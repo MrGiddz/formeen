@@ -165,14 +165,19 @@ export async function GetFormById(id: string): Promise<Form | null> {
     throw new UserNotFoundError();
   }
 
-  const form = await db.form.findUnique({
-    where: {
-      userId: user.id,
-      id,
-    },
-  });
+  try {
+    const form = await db.form.findUnique({
+      where: {
+        userId: user.id,
+        id,
+      },
+    });
 
-  return form;
+    return form;
+  } catch (error) {
+    console.log({ error });
+    return null;
+  }
 }
 
 export async function GetFormByFormUrl(formUrl: string): Promise<Form | null> {
@@ -244,7 +249,6 @@ export async function SubmitForm(
   formUrl: string,
   jsonContent: string
 ): Promise<Form | null> {
-
   const form = await db.form.update({
     where: {
       shareURL: formUrl,
@@ -262,7 +266,7 @@ export async function SubmitForm(
     },
   });
 
-  console.log({form})
+  console.log({ form });
 
   return form;
 }
@@ -281,7 +285,7 @@ export async function GetFormWithSubmissions(id: string) {
     },
     include: {
       formSubmissions: true,
-    }
+    },
   });
 
   return form;

@@ -2,6 +2,7 @@ import React from "react";
 import { FormElementInstance, SubmitFunctionType } from "../../form-elements";
 import { ExtraAttributesProps } from ".";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 type Props = {};
 
@@ -15,17 +16,28 @@ function FormComponent({
   const element = elementInstance as ExtraAttributesProps;
   const { title, subTitle, image, descriptions } = element.extraAttributes;
 
+  console.log({ image });
+
   return (
     <div className="pb-4 border-b mb-8 rounded-t-md">
-      <div className="relative h-full w-full rounded-t-md">
-        <Image
-          src={image}
-          alt="logo-image"
-          className="object-cover w-full rounded-t-md"
-          width={1000}
-          height={450}
-          sizes="auto"
-        />
+      <div
+        className={cn("relative h-72 w-full rounded-t-md")}
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundOrigin: "content-box",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Optionally, you can use the Image component if needed */}
+        {/* <Image
+    src={image}
+    alt="logo-image"
+    className="object-cover w-full rounded-t-md"
+    fill
+    sizes="auto"
+  /> */}
       </div>
       <h1 className="text-xl md:text-2xl font-semibold text-[#2E3192] pt-1 px-4">
         {title}

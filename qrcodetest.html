@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="qrcode"></div>
+    <canvas id="qrCanvas" width="200" height="200"></canvas>
+
+
+    <script>
+        // Function to create the QR code
+        function generateQRCode() {
+            // Create the QR code
+            const qrCode = new QRCode("qrcode", {
+                text: "https://bit.ly/SuperSundayAfricana2-1",
+                width: 200,
+                height: 200,
+            });
+
+            // Wait for the QR code to be generated and then draw it on the canvas
+            setTimeout(() => {
+                const qrCanvas = document.getElementById("qrCanvas");
+                const context = qrCanvas.getContext("2d");
+
+                // Get the QR code's canvas
+                const qrCodeElement = document.getElementById("qrcode").getElementsByTagName("canvas")[0];
+
+                // Draw the QR code on the canvas
+                context.drawImage(qrCodeElement, 0, 0);
+
+                // Load and draw the image at the center of the QR code
+                const img = new Image();
+                img.src = 'https://res.cloudinary.com/dwks1ttmv/image/upload/v1728198171/RCCGCJPOBS4_lgc3zs.png'; // Your image URL
+                img.onload = function () {
+                    const imgSize = 80; // Increased size of the embedded image
+                    const xPos = (qrCanvas.width - imgSize) / 2;
+                    const yPos = (qrCanvas.height - imgSize) / 2;
+                    context.drawImage(img, xPos, yPos, imgSize, imgSize);
+                };
+            }, 1000); // Delay to ensure QR code generation is complete
+        }
+
+        // Generate the QR code with embedded image
+        generateQRCode();
+    </script>
+
+</body>
+
+</html>
