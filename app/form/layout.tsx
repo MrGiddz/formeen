@@ -5,6 +5,8 @@ type Props = {
   children: React.ReactNode;
 };
 
+
+
 export const metadata: Metadata = {
   title:
     "The Dynamites of The Redeemed Christian Church of God, Ceaseless Joy Area HQ, Makogi, Magboro, Ogun State",

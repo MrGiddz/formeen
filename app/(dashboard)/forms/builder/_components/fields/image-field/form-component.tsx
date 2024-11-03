@@ -118,11 +118,15 @@ function FormComponent({
                       const info =
                         result.info as CustomCloudinaryUploadWidgetInfo;
                       const secureUrl = info.secure_url;
+                      console.log({ secureUrl });
                       form.setValue("image", secureUrl, {
                         shouldValidate: true,
                       });
                       if (submitValue) submitValue(element.id, secureUrl);
                     }
+                  }}
+                  onError={(err) => {
+                    console.log({ err });
                   }}
                 >
                   {({ open }) => (

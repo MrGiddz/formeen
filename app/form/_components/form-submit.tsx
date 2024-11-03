@@ -235,6 +235,7 @@ const FormSubmit = ({
           scrollY: -window.scrollY,
           windowWidth: 2048,
           windowHeight: 1152,
+          scale: 3,
           foreignObjectRendering: false,
           onclone: (clonedDoc) => {
             // Wait for fonts to be ready inside the cloned document
@@ -283,6 +284,7 @@ const FormSubmit = ({
           scrollY: -window.scrollY,
           windowWidth: 2048,
           windowHeight: 1152,
+          scale: 3,
           foreignObjectRendering: false,
           onclone: (clonedDoc) => {
             // Wait for fonts to be ready inside the cloned document
@@ -341,7 +343,7 @@ const FormSubmit = ({
       });
   };
 
-  if (true) {
+  if (submitted) {
     return (
       <>
         <Confetti
@@ -367,7 +369,7 @@ const FormSubmit = ({
               <div className="w-full relative flex justify-center items-start overflow-hidden max-h-[300px]  md:max-h-[460px]">
                 <div
                   ref={imageRef}
-                  className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-80 lg:scale-100 border-gray-100 overflow-hidden flex flex-col justify-start items-start"
+                  className="min-w-[500px] w-[600px] min-h-[450px] h-[450px] origin-center contain-size border scale-[.35] sm:scale-[0.65] md:scale-75 lg:scale-90 border-gray-100 overflow-hidden"
                 >
                   <div className="h-[450px] flex flex-col justify-start items-start bg-[#2E3192] relative overflow-hidden">
                     <div className="absolute w-full h-full bg-white rounded-t-[700px] rounded-b-[600px] top-[-20%] right-[-15%] -z-0 bg-[url('/bgpattern.jpg')] before:absolute before:w-full before:h-full before:top-0 before:right-0 before:bg-white/75  before:rounded-t-[700px] before:rounded-b-[600px] "></div>
@@ -399,7 +401,11 @@ const FormSubmit = ({
                           <div className="w-40 h-40 flex justify-center items-center rounded-full bg-white aspect-video relative before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:border-l-[40px] before:border-r-[40px] before:border-t-[40px] before:border-transparent before:border-t-white before:bottom-[-28px] before:-z-[5] z-10">
                             <div className="w-[155px] h-[155px] p-[2px] flex justify-center items-center rounded-full overflow-hidden">
                               <Image
-                                src={userImage || "/avatar.png"}
+                                src={
+                                  userImage ||
+                                  "https://res.cloudinary.com/dwks1ttmv/image/upload/v1730670374/bghiews6k5pfrucjjzlm.jpg" ||
+                                  "/avatar.png"
+                                }
                                 alt="user-image"
                                 width={400}
                                 height={400}
@@ -422,11 +428,11 @@ const FormSubmit = ({
                               />
                             </div>
                           </div>
-                          <p className="text-center text-sm font-normal relative z-30">
-                            I Will Be
+                          <p className="text-center text-sm font-normal relative z-30 mt-3">
+                            I Will Be Attending
                           </p>
                           <h1 className="relative z-30 text-xl text-center leading-7 font-semibold text-[#2E3192]">
-                            Attending Super <br /> Sunday Africana 2.1
+                            Super Sunday Africana 2.1
                           </h1>
                           <div className="pl-5 pt-4 flex flex-col justify-start items-start">
                             <div className="self-start text-end leading-8 col-span-1">
@@ -461,20 +467,19 @@ const FormSubmit = ({
                         </div>
                       </div>
                     </div>
-                    <div className="relative flex justify-end items-center w-full px-1 mt-2">
+                    <div className="relative flex justify-end items-center w-full mt-2">
                       <div className="flex flex-col justify-center items-center self-end">
-                        <div className="bg-white">
-                          <div className="w-24 h-24 relative">
-                            <Image
-                              src="/code.png"
-                              alt="Generated QR Code"
-                              width={98}
-                              height={98}
-                              sizes="auto"
-                            />
-                          </div>
+                        <div className="w-28 h-28 relative grid grid-cols-1 grid-rows-1 p-[1px] rounded bg-white">
+                          <Image
+                            src="https://res.cloudinary.com/dwks1ttmv/image/upload/v1730669484/New_QRCode_y472uc.png"
+                            alt="Generated QR Code"
+                            fill
+                            className="col-span-1 object-cover"
+                            sizes="auto"
+                          />
                         </div>
-                        <p className="text-xs font-normal text-center text-white">
+
+                        <p className="text-xs font-normal text-center text-white px-1">
                           Scan QR code to register
                         </p>
                       </div>
