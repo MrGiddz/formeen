@@ -403,7 +403,6 @@ const FormSubmit = ({
                               <Image
                                 src={
                                   userImage ||
-                                  "https://res.cloudinary.com/dwks1ttmv/image/upload/v1730670374/bghiews6k5pfrucjjzlm.jpg" ||
                                   "/avatar.png"
                                 }
                                 alt="user-image"
