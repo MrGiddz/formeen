@@ -48,11 +48,20 @@ export const CreateFormSchema = z.object({
     message: "Minimum of 4 characters is required",
   }),
   description: z.string().optional(),
+  expiryDate: z.date(),
+  sendReminder: z.boolean().default(true),
+  hasFlier: z.boolean().default(true),
+  daysOfReminder: z.array(z.string()).default([]),
+  banner: z.string().optional(),
 });
-
 export const PreviewFormSchema = z.object({
   name: z.string().min(4, {
     message: "Minimum of 4 characters is required",
   }),
   description: z.string().optional(),
+});
+
+export const ContactSchema = z.object({
+  name: z.string(),
+  phone: z.string(),
 });

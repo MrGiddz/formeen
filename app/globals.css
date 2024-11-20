@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 html,
 body,
@@ -67,4 +67,39 @@ body,
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.react-tagsinput {
+  @apply border border-input px-3 py-1 bg-transparent rounded-md h-9 flex justify-start items-center shadow-sm overflow-hidden;
+}
+
+.react-tagsinput span {
+  @apply inline-flex gap-x-1 px-2 py-[2px];
+}
+
+.react-tagsinput:focus-within {
+  @apply border-none ring-1 ring-ring;
+}
+.react-tagsinput-input {
+  @apply text-[#777] border-0 bg-transparent text-[12px] px-3 w-20 py-1;
+}
+
+.react-tagsinput-input:focus-visible {
+  @apply border-0 ring-0 ring-ring outline-none;
+}
+
+.react-tagsinput-tag {
+  @apply bg-primary rounded-md text-[12px] border-primary text-white text-center px-[2px] py-[2px] flex justify-center items-center;
+}
+
+.react-tagsinput-remove {
+  @apply inline-flex justify-start items-center;
+}
+
+.react-tagsinput-remove::before {
+  @apply content-['x'] text-[12px] text-red-400 inline-flex bg-white rounded-full w-4 justify-center items-center cursor-pointer;
+}
+
+.react-tagsinput-remove::before:hover {
+  @apply bg-gray-50 text-red-500;
 }

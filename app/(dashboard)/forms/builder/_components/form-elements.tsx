@@ -15,6 +15,8 @@ import { PhoneFieldFormElement } from "./fields/phone-field";
 import { EmailFieldFormElement } from "./fields/email-field";
 import { RadioFieldFormElement } from "./fields/radio-field";
 import { ImageFieldElement } from "./fields/image-field";
+import { LongTextFieldFormElement } from "./fields/long-text-field";
+import { NoticeFieldFormElement } from "./fields/notice-field";
 
 export type ElementTypes =
   | "BannerField"
@@ -32,6 +34,8 @@ export type ElementTypes =
   | "TextareaField"
   | "DateField"
   | "SelectField"
+  | "LongTextField"
+  | "NoticeField"
   | "CheckboxField";
 
 export type SubmitFunctionType = (key: string, value: string) => void;
@@ -89,4 +93,6 @@ export const FormElements: FormElementType = {
   EmailField: EmailFieldFormElement,
   RadioField: RadioFieldFormElement,
   ImageField: ImageFieldElement,
+  LongTextField: LongTextFieldFormElement,
+  NoticeField: NoticeFieldFormElement,
 };

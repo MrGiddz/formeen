@@ -21,7 +21,7 @@ class BadMethodError extends Error {
 export const sendSMS = async (message: string, to: string) => {
   var payload = {
     to,
-    from: "RCCG CJP" || "RCCG Ceaseless Joy Makogi",
+    from: "RCCG CJP",
     sms: message,
     type: "plain",
     api_key: "TLts1YBtlYishbeporWsgJj7LpXkWc6xkF9bHTYuLrIgi2rURNtzYCtPmiVqze",

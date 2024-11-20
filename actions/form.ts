@@ -3,8 +3,7 @@
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { CreateFormSchema } from "@/schemas";
-import { Form, FormSubmissions } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { Form } from "@prisma/client";
 import { z } from "zod";
 
 class UserNotFoundError extends Error {
@@ -99,13 +98,12 @@ export async function CreateForm(data: z.infer<typeof CreateFormSchema>) {
 
   const user = await currentUser();
 
-  console.log({ user });
 
   if (!user) {
     throw new UserNotFoundError();
   }
 
-  const { name, description } = data;
+  const { name, description, daysOfReminder, sendReminder, hasFlier, banner, expiryDate } = data;
 
   const nameExists = await db.form.findFirst({
     where: {
@@ -121,7 +119,6 @@ export async function CreateForm(data: z.infer<typeof CreateFormSchema>) {
     throw new Error("Form name already exists");
   }
 
-  console.log({ userId: user.id, name, description, content: "" });
 
   try {
     const form = await db.form.create({
@@ -130,6 +127,11 @@ export async function CreateForm(data: z.infer<typeof CreateFormSchema>) {
         name,
         description,
         content: "[]",
+        sendReminder,
+        hasFlier,
+        daysOfReminder,
+        banner,
+        expiryDate
       },
     });
     return form.id;

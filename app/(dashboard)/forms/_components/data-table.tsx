@@ -49,7 +49,7 @@ const DataTable = ({ columns, rows }: Props) => {
   return (
     <div className="rounded-md border">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold my-4">Submissions</h1>
+        <h1 className="text-2xl font-bold my-4 px-4">Submissions</h1>
         <Button
           variant="ghost"
           className="sm:ml-auto gap-x-2 bg-green-500 group text-white hover:text-green-500"

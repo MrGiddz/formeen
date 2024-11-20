@@ -17,8 +17,13 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
 
 type LoginType = z.infer<typeof LoginSchema>;
 
-export const signInUser = async (values: LoginType, callbackUrl?: string | null) => {
+export const signInUser = async (
+  values: LoginType,
+  callbackUrl?: string | null
+) => {
   const validatedFields = LoginSchema.safeParse(values);
+
+  console.log({ validatedFields });
 
   if (!validatedFields.success) {
     return { error: "Invalid fields!" };
@@ -26,7 +31,11 @@ export const signInUser = async (values: LoginType, callbackUrl?: string | null)
 
   const { email, password, code } = validatedFields.data;
 
+  console.log({ email, password, code })
+
   const existingUser = await getUserByEmail(email);
+
+  console.log({ existingUser });
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return { error: "User not found" };
@@ -44,7 +53,6 @@ export const signInUser = async (values: LoginType, callbackUrl?: string | null)
 
     return { success: "Confirmation email sent!" };
   }
-
   if (existingUser.isTwoFactorEnabled && existingUser.email) {
     if (code) {
       const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email);
@@ -82,6 +90,7 @@ export const signInUser = async (values: LoginType, callbackUrl?: string | null)
   }
 
   try {
+    console.log({ email, password });
     await signIn("credentials", {
       email,
       password,

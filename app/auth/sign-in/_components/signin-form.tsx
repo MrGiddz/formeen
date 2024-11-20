@@ -55,6 +55,7 @@ const SignInForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
+      console.log({ values });
       signInUser(values, callbackUrl)
         .then((data) => {
           if (data?.error) {

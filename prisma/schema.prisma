@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "postgresql"
-  url          = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
   // relationMode = "prisma"
 }
 
@@ -118,13 +118,19 @@ model Form {
   // content     String @db.LongText
   content     String
 
+  expiryDate     DateTime?
+  banner         String @default("")
+  sendReminder   Boolean  @default(false)
+  daysOfReminder String[] @default([""])
+
   visits      Int @default(0)
   submissions Int @default(0)
 
   shareURL        String            @unique @default(uuid())
   formSubmissions FormSubmissions[]
 
-  published Boolean @default(false)
+  published     Boolean @default(false)
+  hasFlier      Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -135,11 +141,20 @@ model Form {
 }
 
 model FormSubmissions {
-  id      String @id @default(cuid())
-  formId  String
-  form    Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
-  content String
-
+  id        String   @id @default(cuid())
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Contacts {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([phone])
 }
