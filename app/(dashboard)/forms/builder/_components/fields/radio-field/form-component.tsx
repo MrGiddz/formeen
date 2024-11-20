@@ -49,8 +49,8 @@ function FormComponent({
       >
         {options.map((option) => (
           <div key={option} className="flex items-center space-x-2 py-1">
-            <RadioGroupItem value={option} id={option} />
-            <Label htmlFor={option}>{option}</Label>
+            <RadioGroupItem value={option} id={option} className="text-base h-5 w-5" />
+            <Label htmlFor={option} className="text-sm">{option}</Label>
           </div>
         ))}
       </RadioGroup>

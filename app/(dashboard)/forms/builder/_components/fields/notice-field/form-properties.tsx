@@ -17,19 +17,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 type Props = {
   elementInstance: FormElementInstance;
 };
 
 const FormPropertiesSchema = z.object({
-  subtitle: z
+  text: z
     .string()
-    .min(2, {
-      message: "Minimum length of 2 characters is required",
+    .min(5, {
+      message: "Minimum length of 5 characters is required",
     })
-    .max(250, {
-      message: "Length cannot exceed 250 characters",
+    .max(150, {
+      message: "Length cannot exceed 500 characters",
     }),
 });
 
@@ -43,7 +44,7 @@ function FormProperties({ elementInstance }: Props) {
   const form = useForm<PropertiesSchemaType>({
     resolver: zodResolver(FormPropertiesSchema),
     defaultValues: {
-      subtitle: element.extraAttributes.subtitle,
+      text: element.extraAttributes.text,
     },
     mode: "all",
   });
@@ -58,10 +59,10 @@ function FormProperties({ elementInstance }: Props) {
   }, [element, form]);
 
   const applyChanges = (values: PropertiesSchemaType) => {
-    const { subtitle } = values;
+    const { text } = values;
     updateElement(element.id, {
       ...element,
-      extraAttributes: { subtitle },
+      extraAttributes: { text },
     });
   };
 
@@ -80,15 +81,15 @@ function FormProperties({ elementInstance }: Props) {
       >
         <FormField
           control={control}
-          name="subtitle"
+          name="text"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Sub-Title</FormLabel>
+              <FormLabel>Label</FormLabel>
               <FormControl>
-                <Input
+                <Textarea
                   {...field}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    form.setValue("subtitle", e.target.value, {
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                    form.setValue("text", e.target.value, {
                       shouldValidate: true,
                     });
                   }}

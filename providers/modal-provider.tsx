@@ -18,9 +18,9 @@ export const ModalProvider = () => {
 
   return (
     <>
-      <CreateFormModal />
       <PreviewFormModal />
       <VerifyDetailsModal />
+      <CreateFormModal />
     </>
   );
 };

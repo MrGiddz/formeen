@@ -40,6 +40,10 @@ async function FormDetails({ params }: { params: { id: string } }) {
         </Suspense>
       </div>
 
+      <div className="py-4">
+        
+      </div>
+
       <div className="pt-10">
         <SubmissionsTable id={id} />
       </div>

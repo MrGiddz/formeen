@@ -3,7 +3,7 @@ import { FormElementInstance, SubmitFunctionType } from "../../form-elements";
 import { ExtraAttributesProps, PhoneFieldFormElement } from ".";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { cn, formatPhoneNumber } from "@/lib/utils";
 
 type Props = {};
 
@@ -28,21 +28,7 @@ function FormComponent({
     setError(isInvalid === true);
   }, [isInvalid]);
 
-  const formatPhoneNumber = (phone: string) => {
-    // Remove all non-numeric characters except +
-    let formattedPhone = phone.replace(/[^\d+]/g, "");
 
-    // Handle number formats based on conditions
-    if (formattedPhone.startsWith("+234")) {
-      formattedPhone = formattedPhone.slice(1); // Remove the "+"
-    } else if (formattedPhone.startsWith("0")) {
-      formattedPhone = "234" + formattedPhone.slice(1); // Replace leading "0" with "234"
-    } else if (!formattedPhone.startsWith("234")) {
-      formattedPhone = "234" + formattedPhone; // Prepend "234" if not already present
-    }
-
-    return formattedPhone;
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

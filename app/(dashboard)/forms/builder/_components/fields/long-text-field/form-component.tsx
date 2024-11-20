@@ -1,6 +1,9 @@
 import React from "react";
-import { FormElementInstance } from "../../form-elements";
+import { FormElementInstance, SubmitFunctionType } from "../../form-elements";
 import { ExtraAttributesProps } from ".";
+
+
+type Props = {};
 
 function FormComponent({
   elementInstance,
@@ -8,9 +11,12 @@ function FormComponent({
   elementInstance: FormElementInstance;
 }) {
   const element = elementInstance as ExtraAttributesProps;
-  const { subtitle } = element.extraAttributes;
+  const { text } = element.extraAttributes;
 
-  return <p className="text-base text-foreground px-6 py-2">{subtitle}</p>;
+
+  return (
+    <h1 className="text-sm px-6 py-4 text-foreground text-[#2E3192]">{text}</h1>
+  );
 }
 
 export default FormComponent;

@@ -34,16 +34,16 @@ const FormPropertiesSchema = z.object({
     .min(2, {
       message: "Minimum length of 2 characters is required",
     })
-    .max(100, {
-      message: "Length cannot exceed 50 characters",
+    .max(150, {
+      message: "Length cannot exceed 150 characters",
     }),
   subTitle: z
     .string()
     .min(2, {
       message: "Minimum length of 2 characters is required",
     })
-    .max(100, {
-      message: "Length cannot exceed 50 characters",
+    .max(250, {
+      message: "Length cannot exceed 250 characters",
     }),
   descriptions: z.array(
     z.object({

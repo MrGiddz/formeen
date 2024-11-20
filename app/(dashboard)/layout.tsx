@@ -7,6 +7,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import React from "react";
+import "react-datepicker/dist/react-datepicker.css"; 
 
 type Props = {};
 
