@@ -26,7 +26,7 @@ import z from "zod";
 
 type Props = z.infer<typeof ContactSchema>;
 
-const Messages = (props: Props) => {
+const Messages = () => {
   const [contacts, setContacts] = useState<Props[] | null>(null);
   const [addNew, setAddnew] = useState(false);
   const [message, setMessage] = useState<string>("");
