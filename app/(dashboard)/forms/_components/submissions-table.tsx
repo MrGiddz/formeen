@@ -28,8 +28,15 @@ const SubmissionsTable = async ({ id }: { id: string }) => {
     id: string;
     label: string;
     required: boolean;
-    type: ElementTypes;
+    type: ElementTypes | "Selector";
   }[] = [];
+
+  columns.push({
+    id: `${new Date().getTime()}`,
+    label: "Select",
+    required: false,
+    type: "Selector",
+  });
 
   for (const element of formElements) {
     switch (element.type) {
@@ -61,6 +68,7 @@ const SubmissionsTable = async ({ id }: { id: string }) => {
     const content = JSON.parse(submission.content);
     rows.push({
       ...content,
+      selected: false,
       submittedAt: submission.createdAt,
     });
   }
