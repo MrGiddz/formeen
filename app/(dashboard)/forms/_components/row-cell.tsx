@@ -5,7 +5,18 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Checkbox } from "@/components/ui/checkbox";
 
-function RowCell({ type, value }: { type: ElementTypes; value: string }) {
+function RowCell({
+  type,
+  value,
+  onCheckedChange,
+  selected,
+}: {
+  type: ElementTypes | "Selector";
+  value: string;
+  onCheckedChange?: (id: boolean) => void;
+  selected?: boolean;
+}) {
+  console.log({value})
   let node: ReactNode = value;
   switch (type) {
     case "DateField":
@@ -15,7 +26,13 @@ function RowCell({ type, value }: { type: ElementTypes; value: string }) {
       break;
     case "CheckboxField":
       const checked = value === "true";
-      node = <Checkbox checked={checked} disabled />;
+      node = <Checkbox checked={checked} onChange={(e) => console.log({ e })} />;
+      break;
+
+    case "Selector":
+      node = (
+        <Checkbox checked={selected} onCheckedChange={onCheckedChange} />
+      );
       break;
 
     default:

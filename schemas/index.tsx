@@ -65,3 +65,9 @@ export const ContactSchema = z.object({
   name: z.string(),
   phone: z.string(),
 });
+
+export const SendMessageSchema = z.object({
+  message: z.string(),
+  medium: z.enum(["phone", "email", "none"]),
+  
+});

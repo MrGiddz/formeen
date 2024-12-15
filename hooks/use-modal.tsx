@@ -1,12 +1,18 @@
 import { FormElementInstance } from "@/app/(dashboard)/forms/builder/_components/form-elements";
 import { create } from "zustand";
 
-export type ModalType = "createForm" | "previewForm" | "verifyDetails";
+export type ModalType =
+  | "createForm"
+  | "previewForm"
+  | "verifyDetails"
+  | "sendMessage";
 
 interface ModalData {
-  elements?: FormElementInstance[],
+  elements?: FormElementInstance[];
   description?: string;
-  action?: (() => void) | undefined
+  action?: (() => void) | undefined;
+  medium?: "email" | "phone" | "none";
+  receipients?: { email?: string; phone?: string; name?: string }[];
 }
 interface useModalProps {
   type: ModalType | null;

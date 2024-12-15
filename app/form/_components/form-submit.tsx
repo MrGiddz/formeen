@@ -4,7 +4,7 @@ import {
   FormElementInstance,
   FormElements,
 } from "../../(dashboard)/forms/builder/_components/form-elements";
-import { useCallback, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { ImSpinner2 } from "react-icons/im";
 import { SubmitForm } from "@/actions/form";
@@ -24,6 +24,7 @@ interface FormSubmitProps {
   content: FormElementInstance[];
   formName: string;
   description?: string;
+  formExipred?: boolean
 }
 
 const FormSubmit = ({
@@ -31,6 +32,7 @@ const FormSubmit = ({
   content,
   formName,
   description,
+  formExipred
 }: FormSubmitProps) => {
   const formValues = useRef<{ [key: string]: string }>({});
   const formErrors = useRef<{ [key: string]: boolean }>({});
@@ -47,6 +49,7 @@ const FormSubmit = ({
   const { onOpen } = useModal();
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [form, setForm] = useState<Form | null>(null);
+  const [expired, setExpired] = useState(null);
 
   const submitValue = (key: string, value: string) => {
     formValues.current[key] = value;
@@ -123,7 +126,7 @@ const FormSubmit = ({
 
     try {
       const jsonElements = JSON.stringify(formValues.current);
-      const formDetails = (await SubmitForm(formUrl, jsonElements));
+      const formDetails = await SubmitForm(formUrl, jsonElements);
       setForm(formDetails);
       setSubmitted(true);
       AddQueryParam("submitted", "true");
@@ -346,8 +349,30 @@ const FormSubmit = ({
       });
   };
 
+
+  if (formExipred) {
+    return (
+      <div
+        className={cn(
+          "flex flex-col justify-center w-full h-full items-center p-4 font-['Inter',sans-serif]"
+        )}
+      >
+        <div className="max-w-3xl flex my-auto h-60 flex-col gap-4 flex-grow bg-background w-full p-8 md:border md:shadow-xl rounded">
+          <div className="overflow-hidden">
+            <h1 className="text-xl md:text-2xl font-bold z-50 text-center">
+              Sorry you can&apos;t register any more.
+            </h1>
+            <p className="text-muted-foreground z-50 text-sm md:text-base text-center">
+              Form Expired
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (submitted) {
-    console.log({form})
+    console.log({ form });
     if (form?.hasFlier) {
       return (
         <>

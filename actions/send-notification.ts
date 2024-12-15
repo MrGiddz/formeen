@@ -28,7 +28,7 @@ export const sendSMS = async (message: string, to: string) => {
     channel: "generic",
   };
 
-  console.log("sending sms");
+  console.log("sending sms", payload);
   try {
     const { data } = await axios.post(
       "https://api.ng.termii.com/api/sms/send",
@@ -40,6 +40,7 @@ export const sendSMS = async (message: string, to: string) => {
     if (data) {
       return data;
     }
+    return null;
   } catch (error) {
     throw new SendingError();
   }
